@@ -8,6 +8,8 @@ The model is trained on 147M multi-turn dialogue from Reddit discussion thread. 
 
 The include script can be used to reproduce the results of DSTC-7 grounded dialogue generation challenge and a *6k multi-reference dataset* created from Reddit data. 
 
+Project webpage: [https://www.microsoft.com/en-us/research/project/large-scale-pretraining-for-response-generation/](https://www.microsoft.com/en-us/research/project/large-scale-pretraining-for-response-generation/)
+
 
 **This github repository will be updated soon. Please stay tuned.**
 
@@ -107,7 +109,7 @@ python -m torch.distributed.launch --nproc_per_node=8 ./train.py --gradient_accu
 <!--## ConvAI challenge -->
 
 ## Try our system
-The live demo access is upon approval request. 
+The live demo and decoding script access is upon approval request. Please apply [here](https://docs.google.com/spreadsheets/d/1epTNfaqva1isVO_o9pbyhVLsnzDn58dGkcLB0OUVcqs/edit?usp=sharing)
 
 <!--This model should give a Hits@1 over 79, perplexity of 20.5 and F1 of 16.5 using the convai2 evaluation script (see below).
 
@@ -201,9 +203,11 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 ## Citation
 
-If you use this code in your research, you can cite our [arxiv paper]():
+To be updated.
+
+<!--If you use this code in your research, you can cite our [arxiv paper]():
 
 ```bash
 @article{
 }
-```
+```-->
