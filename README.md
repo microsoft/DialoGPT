@@ -97,6 +97,8 @@ python -m torch.distributed.launch --nproc_per_node=8 ./train.py --gradient_accu
 
 ## 6K multi-ref dataset
 
+We test on 6K multi-ref dataset from Reddit. The results are summarized in below
+
 | Experiment                | NIST1  | NIST2  | NIST3  | NIST4  | BLEU1  | BLEU2  | BLEU3  | BLEU4  | METEOR   | entropy1 | entropy2 | entropy3 | entropy4 | diversity1 | diversity2 |
 |---------------------------|--------|--------|--------|--------|--------|--------|--------|--------|----------|----------|----------|----------|----------|------------|------------|
 | Human          | 2.9939 | 3.412  | 3.491  | 3.5033 | 0.3961 | 0.179  | 0.1071 | 0.0748 | 0.106361 | 6.864963 | 10.21325 | 10.97053 | 10.9951  | 0.145482   | 0.629633   |
@@ -107,6 +109,18 @@ python -m torch.distributed.launch --nproc_per_node=8 ./train.py --gradient_accu
 | 762M from scratch  | 2.2361 | 2.5236 | 2.5709 | 2.5774 | 0.4253 | 0.1787 | 0.0907 | 0.0519 | 0.095325 | 5.347718 | 7.964725 | 8.944626 | 9.322642 | 0.074926   | 0.293058   |
 
 <!--## ConvAI challenge -->
+
+Multi-turn generation examples from an interactive environment:
+
+|Role | Response |
+|---------|--------|
+|User | Does money buy happiness? |
+| Bot |  Depends how much money you spend on it .|
+|User | What is the best way to buy happiness ? |
+| Bot | You just have to be a millionaire by your early 20s, then you can be happy . |
+|User |This is so difficult ! |
+| Bot | You have no idea how hard it is to be a millionaire and happy . There is a reason the rich have a lot of money |
+
 
 ## Try our system
 The live demo and decoding script access is upon approval request. Please apply [here](https://docs.google.com/spreadsheets/d/1epTNfaqva1isVO_o9pbyhVLsnzDn58dGkcLB0OUVcqs/edit?usp=sharing)
