@@ -1,60 +1,131 @@
-# A State-of-the-Art Large-scale Pretrained Response generation model (DialogLSP)
+# A State-of-the-Art Large-scale Pretrained Response generation model (DialoGPT)
 
-This repo contains the source code and trained model for a large-scale pretrained dialogue response generation model. See more details on our [project page](https://www.microsoft.com/en-us/research/project/large-scale-pretraining-for-response-generation/)
+This repository contains the source code and trained model for a large-scale pretrained dialogue response generation model. See more details on our [project page](https://www.microsoft.com/en-us/research/project/large-scale-pretraining-for-response-generation/)
 
-The repo is based on [huggingface pytorch-transformer](https://github.com/huggingface/transfer-learning-conv-ai) and [OpenAI GPT-2](https://github.com/openai/gpt-2), containing data extraction script, model training code and pretrained small (117M) medium (345M) and large (762M) model checkpoint.
+The repository is based on [huggingface pytorch-transformer](https://github.com/huggingface/transfer-learning-conv-ai) and [OpenAI GPT-2](https://github.com/openai/gpt-2), containing data extraction script, model training code and pretrained small (117M) medium (345M) and large (762M) model checkpoint.
 
-The model is trained on 147M multi-turn dialogue from Reddit discussion thread. The large model can be trained in about *50-100 hours on a 8 V100 machine*, with distributed training and FP16 option. 
+The model is trained on 147M multi-turn dialogue from Reddit discussion thread. The largest model can be trained in several hours on a 8 V100 machines (however this is not required), with distributed training and FP16 option. 
 
-The include script can be used to reproduce the results of DSTC-7 grounded dialogue generation challenge and a *6k multi-reference dataset* created from Reddit data. 
+The include script can be used to reproduce the results of DSTC-7 grounded dialogue generation challenge and a 6k multi-reference dataset created from Reddit data. 
 
 Project webpage: [https://www.microsoft.com/en-us/research/project/large-scale-pretraining-for-response-generation/](https://www.microsoft.com/en-us/research/project/large-scale-pretraining-for-response-generation/)
 
 
 **This github repository will be updated soon. Please stay tuned.**
+## Minimal Computational Configurations
+This code can be run on CPU, but it would be slow. We would recommend to use GPU to train and finetune all models. There is no minimal limit of the number of GPUs. However, if using distributed train for multiple GPUs configuration, the speed-up vs the number of GPUs is roughly sub-linear. To simulate the same batchsize when using less GPUs, please use a larger `gradient_accumulation_steps` in model training. 
+
+The 117M and 345M model can be loaded in a single GPU with 12G memory. The 762M model would require a single GPU that has greater than 16G memory for efficient training. The training speed on a benchmark data with 50M training instances and V100 GPUs:
+
+| n\_gpu           | epoch time (min) | token/sec  |
+|----------------------|--------|--------|
+| 1              | 158 | 25466 |
+| 2              | 96 | 41861 |
+| 4              | 73 | 54994 |
+| 8              | 65 | 63612 |
+
+Fine-tuning from our pretrained model on a new dataset typically requires 1-2 epochs.
+
+
+## Setup & Installation (TL;DR)
+
+We created a demo script `demo.py` to ease the difficulty of the deployment of this system. The `demo.py` contains a pipeline of **model downloading**, data extraction, data preprocessing and model training over a dummy dataset within one commandline. 
 
 
 
+#### Train model with Conda Environment
 
-## Setup & Installation
+Please use the below commandlines to clone, install the requirements and load the Conda environment (Note that Cuda 10 is required):
 
-Please use the below commandlines to clone and install *the requirements:*
 
 ```bash
-git clone https://github.com/microsoft/DialogLSP.git
-cd DialogLSP
-pip install -r requirements.txt
+sudo apt-get install -y make wget gzip bzip2 xz-utils zstd
 ```
-
-## Train the model with Docker environment
-
-The image environment for running the code can be *loaded as below*:  
 
 ```bash
-$ docker run --rm -it icaruszyz/large-scale-training:v5 bash
+git clone https://github.com/microsoft/DialoGPT.git
+cd DialoGPT
+conda env create -f LSP-linux.yml -n LSP
+conda activate LSP
 ```
 
-You can then *run* the `bash load_model.sh` to get a pretrained model:
+If you run this on an architecture other than Linux, please use `LSP-generic.yml` instead of `LSP-linux.yml` but please note that the generic one is not tested in all platform, so the stablity can not be gauranteed.
+To use fp16 training, please install apex by using commands below
+  
+```bash
+conda activate LSP
+git clone https://github.com/NVIDIA/apex
+cd apex
+git reset --hard 3d01e4a0a188cc8df54bc6e44cf5eb40ff6b4cc5
+pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" .
+python3.6 demo.py
+```
+
+#### Train model with Docker environment
+To start, first install the docker and Nvidia-docker from their official repos.
+The image environment for running the code can be loaded as below:  
+
+*Nvidia-docker v2.**
 
 ```bash
-bash load_model.sh
+$ docker run --gpus all --ipc=host --rm -it -v $PWD:/workspace --network=host icaruszyz/large-scale-training:dialogpt bash
 ```
-
-## Pretrained model
-
-The pretrained and fine-tuned model are available on azure blobstorage [here](). The `load_model.sh` will automatically download and use the pretrained model. 
-
-## Preparing data
-
-The trainig data need to be first processed into a database file with below *commandline*
+*Nvidia-docker v1.**
 
 ```bash
-python prepro_v4.py
+$ nvidia-docker --rm -it -v $PWD:/workspace --network=host icaruszyz/large-scale-training:dialogpt bash
 ```
 
-## Using the training script
+Inside the docker container, run 
 
-The training script can be used in single GPU or multi GPU settings:
+```bash
+python demo.py
+```
+
+
+
+## Pipeline details
+
+This section explains all components in the `demo.py`.
+
+#### Data loading
+Before running `demo.py`, you can set *DATA_FOLDER* (default value `./models`)  in `demo.py` as the place you want to download all the data and pretrained/fine-tuned models. Then simply run
+```bash
+python demo.py
+```
+to 
+
+* automatically download models and data, 
+* prepare raw data into db that is ready to use for the program,
+* generate a training scripts.
+
+Note that by default the `demo.py` will use a dummy data, please specify the Reddit training data by using option `--data`. Three options are  available:`dummy`,`small` and `full`. 
+
+```bash
+python demo.py --data small
+python demo.py --data full
+```
+
+The small Reddit data is around 140MB and the full Reddit data is more than 30GB. You can prepare a cup of coffee when processing with the full Reddit data because **it takes a long time**!
+
+#### Pretrained model
+
+The pretrained and fine-tuned models are available on azure blobstorage [here](https://convaisharables.blob.core.windows.net/lsp).
+Please run/see `demo.py` for more details about how to download/use those models. 
+
+#### Preparing data
+First, use the `prepare4db.sh` to convert a tsv data file into the correct format that the following script can recognize.
+The trainig data need to be then processed into a database file with below commandline:
+
+```bash
+python prepro.py --corpus $DATA_PATH
+```
+
+
+
+#### Using the training script
+
+The training script can be used in single GPU or multiple GPU settings (distributed training across multiple GPUs within a single node):
 
 ```bash
 python ./LSP_train.py  # Single GPU training
@@ -62,7 +133,7 @@ python -m torch.distributed.launch --nproc_per_node=8 ./LSP_train.py  # Training
 ```
 
 
-The training script accept *several arguments* to tweak the training: 
+The training script accept several arguments to tweak the training: 
 
 Argument | Type | Default value | Description
 ---------|------|---------------|------------
@@ -77,40 +148,97 @@ gradient\_accumulation\_steps | `int` | `2` | Accumulate gradients on several st
 learning\_rate | `float` | `1e-5` | Learning rate
 lr\_schedule | `str` | `noam` | Learning rate schedule can be chosen from [`noam`, `noamwd`, `BERT`, `None`]
 num\_optim\_steps | `int` | `1000000` | Number of training optimization steps
+no_token_id | `boolean` | `True` | If set True, using all-zeros token-type embedding.
 
 
-## DSTC challenge
+During the training, two log files will be updated. The `train_log.txt` and `eval_log.txt` contains the model loss, perplexity and training speed (tokens/sec) statistics for the training and dev set. 
 
-Here is how to reproduce our DSTC results on a server with 8 V100 GPUs (adapt number of nodes and batch sizes to your configuration):
+The log file and saved model checkpoint can be found in `./models/output_model`
 
-```bash
-python -m torch.distributed.launch --nproc_per_node=8 ./train.py --gradient_accumulation_steps=4 --lm_coef=2.0 --max_history=2 --n_epochs=1 --num_candidates=4 --personality_permutations=2 --train_batch_size=2 --valid_batch_size=2
-```
+#### Model decoding
+We note that even with properly filtered Reddit dataset, sometimes our model can still generate moderately toxic/inappropriate responses. Due to this reason, we are unable to provide the decoding script at this time (The live demo and decoding script access is upon invitation only now ).
+We are currently still working on a controlled decoding method to prevent this system from toxic generation. Please stay tuned. 
+
+
+## Models
+
+We release 6 fine-tuned models which can be further fine-tuned on low-resource  user-customized dataset. The total parameters in these models range from 117M to 762M, in accord with OpenAI GPT-2 model sizes.   
+
+| Model           |  Download|
+|----------------------|--------|
+| DialoGPT 762M model| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/large_ft.pkl) |
+| DialoGPT 345M model| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/medium_ft.pkl) |
+| DialoGPT 117M model| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/small_ft.pkl) |
+
+The model files can be loaded exactly as the GPT-2 model checkpoint from Huggingface pytorch-transformer repository. 
+
+
+## Evaluations
+
+#### DSTC-7 challenge
+
+Our model achieved the state-of-the-art results in [DSTC-7 Challenge response generation task](https://github.com/mgalley/DSTC7-End-to-End-Conversation-Modeling). 
+
 | Experiment           | NIST1  | NIST2  | NIST3  | NIST4  | BLEU1  | BLEU2  | BLEU3  | BLEU4  | METEOR | entropy1 | entropy2 | entropy3 | entropy4 | diversity1 | diversity2 | avg_len |
 |----------------------|--------|--------|--------|--------|--------|--------|--------|--------|--------|----------|----------|----------|----------|------------|------------|---------|
 | Human                | 2.4237 | 2.6244 | 2.6472 | 2.65   | 0.3408 | 0.1235 | 0.0572 | 0.0313 | 0.0831 | 6.5893   | 9.7423   | 10.4101  | 10.4450  | 0.1666     | 0.6701     | 18.7568 |
-| Best System (Team B) | 2.3408 | 2.5102 | 2.522  | 2.523  | 0.4122 | 0.1435 | 0.0501 | 0.0183 | 0.0807 | 5.3832   | 7.6065   | 8.5304   | 9.0298   | 0.1089     | 0.3249     | 15.1327 |
-| our system           | 2.5863 | 2.804  | 2.823  | 2.8246 | 0.3927 | 0.1416 | 0.0555 | 0.0231 | 0.0851 | 5.5791   | 8.5109   | 9.6872   | 10.0765  | 0.0913     | 0.3973     | 16.9484 |
-| our system(bs)       | 2.5943 | 2.9163 | 2.9624 | 2.9681 | 0.4238 | 0.1918 | 0.1027 | 0.0605 | 0.0929 | 6.0815   | 8.7379   | 9.4037   | 9.5697   | 0.1573     | 0.5103     | 14.1603 |
+| DSTC-7 Winner | 2.3408 | 2.5102 | 2.522  | 2.523  | 0.4122 | 0.1435 | 0.0501 | 0.0183 | 0.0807 | 5.3832   | 7.6065   | 8.5304   | 9.0298   | 0.1089     | 0.3249     | 15.1327 |
+| DialoGPT           | 2.5863 | 2.804  | 2.823  | 2.8246 | 0.3927 | 0.1416 | 0.0555 | 0.0231 | 0.0851 | 5.5791   | 8.5109   | 9.6872   | 10.0765  | 0.0913     | 0.3973     | 16.9484 |
+| DialoGPT(beam search)       | **2.5943**| **2.9163** | **2.9624** | **2.9681**| **0.4238** | **0.1918** | **0.1027** | **0.0605** | **0.0929** | **6.0815**   | **8.7379**   | 9.4037   | 9.5697   | 0.1573     | 0.5103     | 14.1603 |
+
+Note that the superior automatic evaluation comparing to human responses does not necessary imply that our model achieves human parity. Please check out our paper for more detailed analysis.
 
 
+To fine-tune the `345M` DialoGPT model on the DSTC-7 challenge data on a server with 8 V100 GPUs, please run the following commandline (The DSTC data can be found at [DSTC-7 repo](https://github.com/mgalley/DSTC7-End-to-End-Conversation-Modeling)): 
 
-## 6K multi-ref dataset
+```bash
+python3 -m torch.distributed.launch --nproc_per_node=8 train_LSP.py --init_checkpoint ./models/medium/medium_ft.pkl --train_input_file ./data/DSTC_train.db --eval_input_file ./data/DSTC_valid.tsv --model_name_or_path ./model/medium/ --learning_rate 1e-4  --train_batch_size 64 --eval_batch_size 64 --no_token_id
+```
 
-We test on 6K multi-ref dataset from Reddit. The results are summarized in below
+The trained model can be found at [DSTC medium model](https://convaisharables.blob.core.windows.net/lsp/DSTC/medium_ft.pkl)
 
-| Experiment                | NIST1  | NIST2  | NIST3  | NIST4  | BLEU1  | BLEU2  | BLEU3  | BLEU4  | METEOR   | entropy1 | entropy2 | entropy3 | entropy4 | diversity1 | diversity2 |
-|---------------------------|--------|--------|--------|--------|--------|--------|--------|--------|----------|----------|----------|----------|----------|------------|------------|
-| Human          | 2.9939 | 3.412  | 3.491  | 3.5033 | 0.3961 | 0.179  | 0.1071 | 0.0748 | 0.106361 | 6.864963 | 10.21325 | 10.97053 | 10.9951  | 0.145482   | 0.629633   |
-| 117M from scratch  | 1.1628 | 1.2315 | 1.2394 | 1.2402 | 0.3469 | 0.0974 | 0.038  | 0.0177 | 0.061685 | 4.536772 | 6.142383 | 6.759354 | 7.110297 | 0.053304   | 0.159148   |
-| 345M from scratch | 2.2252 | 2.5085 | 2.5535 | 2.5596 | 0.3523 | 0.1692 | 0.0834 | 0.0459 | 0.093443 | 5.198841 | 7.669613 | 8.623757 | 9.034887 | 0.066593   | 0.256432   |
-| 117M finetuning    | 2.2483 | 2.3943 | 2.4058 | 2.4065 | 0.3543 | 0.1054 | 0.0385 | 0.0155 | 0.075305 | 5.14805  | 7.292704 | 8.118871 | 8.510193 | 0.080533   | 0.262462   |
-| 345M finetuning   | 2.6727 | 3.0033 | 3.0523 | 3.0585 | 0.4097 | 0.1696 | 0.0831 | 0.0456 | 0.098122 | 5.276367 | 7.765976 | 8.727143 | 9.125835 | 0.06801    | 0.263088   |
-| 762M from scratch  | 2.2361 | 2.5236 | 2.5709 | 2.5774 | 0.4253 | 0.1787 | 0.0907 | 0.0519 | 0.095325 | 5.347718 | 7.964725 | 8.944626 | 9.322642 | 0.074926   | 0.293058   |
 
+#### Evaluation
+
+1. Please **downloads** the following 3rd-party packages and save into the empty folder `3rdparty`:
+	* [**mteval-v14c.pl**](https://goo.gl/YUFajQ) to compute [NIST](http://www.mt-archive.info/HLT-2002-Doddington.pdf). You may need to install the following [perl](https://www.perl.org/get.html) modules (e.g. by `cpan install`): XML:Twig, Sort:Naturally and String:Util.
+	* [**meteor-1.5**](http://www.cs.cmu.edu/~alavie/METEOR/download/meteor-1.5.tar.gz) to compute [METEOR](http://www.cs.cmu.edu/~alavie/METEOR/index.html). It requires [Java](https://www.java.com/en/download/help/download_options.xml).
+
+
+2. Please follow the [DSTC-7 official repo](https://github.com/mgalley/DSTC7-End-to-End-Conversation-Modeling/tree/master/data_extraction) to extract the data, and put `data-official-test/test.refs.txt` into `./dstc/data/` folder.
+
+3. Run the extraction script below to produce the human response hypothesis file `human.resp.txt`:
+
+	```bash
+	python extract_human.py
+	```
+
+4. Finally, to reproduce the results of human hypothesis on DSTC dataset, please run following commands under the repo folder:
+
+	```bash
+	python batch_eval.py
+	```
+
+The evaluation results will be generated in the folder `./dstc/eval/`
+
+
+## 6K multi-ref dataset result
+
+We test on 6K multi-ref dataset from Reddit (this test data will be release soon). The results are summarized in below
+
+
+| Experiment                   | NIST1 | NIST2 | NIST3 | NIST4 | BLEU1  | BLEU2  | BLEU3  | BLEU4 | METEOR | entropy4 | diversity1 | diversity2 |
+|------------------------------|-------|-------|-------|-------|--------|--------|--------|-------|--------|----------|------------|------------|
+| Human response               | 2.99  | 3.41  | 3.83  | 4.25  | 39.61% | 17.90% | 10.71% | 7.48% | 10.64% | 11       | 14.50%     | 63.00%     |
+| DialoGPT 117M      | 2.25  | 2.39  | 2.41  | 2.41  | 35.43% | 10.54% | 3.85%  | 1.55% | 7.53%  | 10.78    | 8.60%      | 39.90%     |
+| DialoGPT 345M      |**2.67** | **3**     | **3.05**  | **3.06**  | 40.97% | 16.96% | 8.31%  | 4.56% | **9.81%**  | 9.13     | 6.80%      | 26.30%     |
+| DialoGPT 762M      | 2.51  | 2.84  | 2.89  | 2.9   | **44.45%** | **18.66%** | **9.32%**  | **5.25%** | 9.66%  | **9.72**     | **7.76%**      | **29.93%**    |
+
+<!--| DialoGPT 762M  (beam search)| 2.51  | 2.9   | 2.97  | 2.98  | 44.84% | 21.08% | 12.01% | 7.57% | 10.11% | 10.06    | 11.62%     | 44.07%     |-->
 <!--## ConvAI challenge -->
-
-Multi-turn generation examples from an interactive environment:
+<!--| DialoGPT 345M (beam search)  | 2.94  | 3.4   | 3.49  | 3.5   | 45.27% | 21.76% | 12.51% | 7.92% | 10.74% | 10.48    | 12.38%     | 48.74%     |-->
+## Generated Examples
+* Multi-turn generation examples from an interactive environment:
 
 |Role | Response |
 |---------|--------|
@@ -121,9 +249,49 @@ Multi-turn generation examples from an interactive environment:
 |User |This is so difficult ! |
 | Bot | You have no idea how hard it is to be a millionaire and happy . There is a reason the rich have a lot of money |
 
+* Commonsense question answering examples
+
+|User | Bot |
+|---------|--------|
+|who is the first president of the United States | George Washington |
+|what is the boiling point of water? | I think it's about 212 F. |
+|which one is bigger, sun or moon? | The sun . |
+|which animal has black and white stripes? | A black and white striped cat . |
+
+* Handling context that does not appear in training examples (note that training examples are sampled from 2005 to 2017)
+
+|User | Bot |
+|---------|--------|
+|The trading war between China and US is still happening . | I'm sure the Chinese government and the U . S . will be fine with that as long as they keep their arms on the table and the money flowing . |
+|who won the world cup in 2018 ? | Germany , I believe . |
+|Nvidia's Titan RTX is really good . | I have this card and i love it . No complaints . |
+|Can Porsche beat Tesla with its new Taycan EV ? | I don't think so . The Tesla is more powerful than the porsche .
+
+* Our bot's response to philosophy questions
+
+|User | Bot |
+|---------|--------|
+|What is the meaning of a good life ? | I think it's that we're all connected to our past lives and the meaning of life is to live the way you want to and how you want to . |
+|Which is more important -- being successful or being happy ? | Being successful is just endless . Being happy is the only thing that matters . |
+|Is peace the only way to stop war ? |  Not if the world is not willing to work with you . Peace is the ultimate goal , but peace requires more than that . |
+| How much freedom should people have ? |  The right amount of freedom is the freedom to do as you please , as long as you don't hurt people or property .|
+
+
+* Finally  
+
+|User | Bot |
+|---------|--------|
+|What do you think of the DialoGPT repo ? | It's pretty good , but it's very easy to find a bug . |
+
+Please start a issue if you spot any :)
+
+
 
 ## Try our system
-The live demo and decoding script access is upon approval request. Please apply [here](https://docs.google.com/spreadsheets/d/1epTNfaqva1isVO_o9pbyhVLsnzDn58dGkcLB0OUVcqs/edit?usp=sharing)
+The live demo and decoding script access is upon invitation only now. Please stayed tuned for the full release. 
+
+
+<!--The live demo and decoding script access is upon approval request. Please apply [here](https://docs.google.com/spreadsheets/d/1epTNfaqva1isVO_o9pbyhVLsnzDn58dGkcLB0OUVcqs/edit?usp=sharing)-->
 
 <!--This model should give a Hits@1 over 79, perplexity of 20.5 and F1 of 16.5 using the convai2 evaluation script (see below).
 
@@ -200,7 +368,7 @@ top_p | `float` | `0.9` | Nucleus filtering (top-p) before sampling (`<=0.0`: no
 
 -->
 
-# Contributing
+## Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
@@ -214,6 +382,11 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
+## Disclaimer
+
+This repository aims to facilitate research in large-scale pretraining for conversational data. This toolkit contains only part of the modeling machinery needed to actually produce a model weight file in a running dialog. On its own, this model provides only information about the weights of various text spans; in order for a researcher to actually use it, they will need to bring conversational data of their own and decode the response generation from the pretrained system. Microsoft is not responsible for any generation from the 3rd party utilization of the pretrained system. 
+
+
 
 ## Citation
 
@@ -224,4 +397,7 @@ To be updated.
 ```bash
 @article{
 }
-```-->
+```
+-->
+
+

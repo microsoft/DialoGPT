@@ -1,0 +1,66 @@
+#  Copyright (c) Microsoft Corporation. 
+#  Licensed under the MIT license. 
+
+### Configuration file: ###
+
+# Minimum context length:
+MIN_DEPTH=2
+
+# Maximum context length: 
+MAX_DEPTH=5
+
+# Minimum comment score:
+MIN_SCORE=1
+
+# Whether to treat title of the submission as first turn:
+TITLE=0
+
+# Whether only leaves are used as target responses:
+# (If true, then the assumption is that the training 
+# code will internally unroll conversation into tuples, 
+# i.e., a turn sequence T1 T2 ... Tn will be turned into 
+# (T1, T2), (T1 EOS T2, T3), (T1 EOS T2 EOS T3, T4) etc.
+LEAVES_ONLY=1
+
+# Directory containing Reddit RC_*bz2 and RS_*bz2 files):
+S=data/reddit
+
+# Directory containing hash files ensuring reproducibility
+# of the results: (hash values indicate which instances 
+# to exclude or exclude from training)
+K=data/keys
+
+# Target directory:
+T=data/out
+
+# Dataset: (either 'full' or 'small')
+#SIZE=small
+
+# List of block words: (currently empty as we can't 
+# release or blocklist, that's why use hashes above to
+# control which responses are offensive. You may want 
+# to populate this file with offensive words if using
+# this code with any new data, e.g., from 2019, as 
+# hash-based filtering would have to be turned off).
+WORDS_BLOCKLIST=--bl_words lists/words.blocklist.txt
+
+# List of blocked subreddits: (empty at the moment;
+# same reason as with WORDS_BLOCKLIST.)
+SUBREDDITS_BLOCKLIST=--bl_subreddits lists/subreddits.blocklist.txt
+
+# Uncomment this to disable hash-based filtering:
+# (e.g., if you use more recent data, in which case
+# hash values would not match anything.)
+#HASH_FLAG=--ignore_keys=True
+
+### Please do not modify the rest of this file: ###
+P=extract
+A=conv
+U=https://files.pushshift.io/reddit
+
+ifndef SIZE
+SIZE=small
+endif
+
+include configs/Makefile.targets.$(SIZE)
+include configs/Makefile.common
