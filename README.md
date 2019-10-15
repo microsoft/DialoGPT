@@ -368,6 +368,12 @@ top_p | `float` | `0.9` | Nucleus filtering (top-p) before sampling (`<=0.0`: no
 
 -->
 
+## Related Project
+
+* Pretrained UniLM: [https://github.com/microsoft/unilm](https://github.com/microsoft/unilm)
+* Microsoft ICECAPS: [https://github.com/microsoft/icecaps](https://github.com/microsoft/icecaps)
+* MT-DNN: [https://github.com/namisan/mt-dnn](https://github.com/namisan/mt-dnn) 
+
 ## Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
