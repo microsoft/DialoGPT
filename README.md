@@ -375,13 +375,8 @@ top_p | `float` | `0.9` | Nucleus filtering (top-p) before sampling (`<=0.0`: no
 	As an orthogonal repository of this project, 
 	Microsoft Icecaps is an open-source toolkit (in tensorflow) for building neural conversational systems. Icecaps provides an array of tools from recent conversation modeling and general NLP literature within a flexible paradigm that enables complex multi-task learning setups. 
 
-
-
-
-
-
-<!--* Pretrained UniLM: [https://github.com/microsoft/unilm](https://github.com/microsoft/unilm)
-* MT-DNN: [https://github.com/namisan/mt-dnn](https://github.com/namisan/mt-dnn) -->
+* Pretrained UniLM: [https://github.com/microsoft/unilm](https://github.com/microsoft/unilm)
+* MT-DNN: [https://github.com/namisan/mt-dnn](https://github.com/namisan/mt-dnn)
 
 ## Contributing
 
