@@ -463,12 +463,12 @@ dmypy.json
 tensorflow_code
 
 # Models
-models
-test.txt
-dstc/
-scripts/
-philly/
-demo/
-docker/
-prepro_v4.py
-prepro.py
+# models
+# test.txt
+# dstc/
+# scripts/
+# philly/
+# demo/
+# docker/
+# prepro_v4.py
+# prepro.py
