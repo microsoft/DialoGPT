@@ -179,12 +179,22 @@ The model files can be loaded exactly as the GPT-2 model checkpoint from Hugging
 
 Our model achieved the state-of-the-art results in [DSTC-7 Challenge response generation task](https://github.com/mgalley/DSTC7-End-to-End-Conversation-Modeling). 
 
-| Experiment           | NIST1  | NIST2  | NIST3  | NIST4  | BLEU1  | BLEU2  | BLEU3  | BLEU4  | METEOR | entropy1 | entropy2 | entropy3 | entropy4 | diversity1 | diversity2 | avg_len |
+
+| Experiment         | NIST2 | NIST4 | BLEU2  | BLEU4 | METEOR | ENT-4 | DIST-1 | DIST-2 | Avg. Len |
+|--------------------|-------|-------|--------|-------|--------|----------|------------|------------|---------|
+| Human response     | 2.62  | 2.65  | 12.35% | 3.13% | 8.31%  | 10.45    | 16.66%     | 67.01%     | 18.8    |
+| DSTC-7 Winner      | 2.51  | 2.52  | 14.35% | 1.83% | 8.07%  | 9.03     | 10.89%     | 32.49%     | 15.1    |
+| DialoGPT 345M      | 2.80  | 2.82  | 14.16% | 2.31% | 8.51%  | 10.08    | 9.13%      | 39.73%     | 16.9    |
+| DialoGPT 345M (BS) | 2.92  | 2.97  | 19.18% | 6.05% | 9.29%  | 9.57     | 15.73%     | 51.03%     | 14.2    |
+
+where ENT represents the [Entropy score](https://arxiv.org/abs/1809.05972), and DIST represents the [Distinct score](https://arxiv.org/pdf/1510.03055.pdf). For all metrics except the average length, larger are better.  
+
+<!--| Experiment           | NIST1  | NIST2  | NIST3  | NIST4  | BLEU1  | BLEU2  | BLEU3  | BLEU4  | METEOR | ENT-1 | ENT-2 | ENT-3 | ENT-4 | DIST-1 | DIST-2 | Len |
 |----------------------|--------|--------|--------|--------|--------|--------|--------|--------|--------|----------|----------|----------|----------|------------|------------|---------|
 | Human                | 2.4237 | 2.6244 | 2.6472 | 2.65   | 0.3408 | 0.1235 | 0.0572 | 0.0313 | 0.0831 | 6.5893   | 9.7423   | 10.4101  | 10.4450  | 0.1666     | 0.6701     | 18.7568 |
 | DSTC-7 Winner | 2.3408 | 2.5102 | 2.522  | 2.523  | 0.4122 | 0.1435 | 0.0501 | 0.0183 | 0.0807 | 5.3832   | 7.6065   | 8.5304   | 9.0298   | 0.1089     | 0.3249     | 15.1327 |
 | DialoGPT           | 2.5863 | 2.804  | 2.823  | 2.8246 | 0.3927 | 0.1416 | 0.0555 | 0.0231 | 0.0851 | 5.5791   | 8.5109   | 9.6872   | 10.0765  | 0.0913     | 0.3973     | 16.9484 |
-| DialoGPT(beam search)       | **2.5943**| **2.9163** | **2.9624** | **2.9681**| **0.4238** | **0.1918** | **0.1027** | **0.0605** | **0.0929** | **6.0815**   | **8.7379**   | 9.4037   | 9.5697   | 0.1573     | 0.5103     | 14.1603 |
+| DialoGPT(beam search)       | **2.5943**| **2.9163** | **2.9624** | **2.9681**| **0.4238** | **0.1918** | **0.1027** | **0.0605** | **0.0929** | **6.0815**   | **8.7379**   | 9.4037   | 9.5697   | 0.1573     | 0.5103     | 14.1603 |-->
 
 Note that the superior automatic evaluation comparing to human responses does not necessary imply that our model achieves human parity. Please check out our paper for more detailed analysis.
 
@@ -226,13 +236,76 @@ The evaluation results will be generated in the folder `./dstc/eval/`
 
 We test on 6K multi-ref dataset from Reddit (this test data will be release soon). The results are summarized in below
 
+| Experiment         | NIST2 | NIST4 | BLEU2  | BLEU4 | METEOR | ENT-4 | DIST-1 | DIST-2 | Avg. Len |
+|--------------------|-------|-------|--------|-------|--------|----------|------------|------------|---------|
+| Human response     | 3.41  | 4.25  | 17.90% | 7.48% | 10.64% | 11       | 14.50%     | 63.00%     | 13.1    |
+| DialoGPT 117M      | 2.39  | 2.41  | 10.54% | 1.55% | 7.53%  | 10.78    | 8.60%      | 39.90%     | 12.8    |
+| DialoGPT 345M      | 3     | 3.06  | 16.96% | 4.56% | 9.81%  | 9.13     | 6.80%      | 26.30%     | 12.2    |
+| DialoGPT 762M      | 2.84  | 2.9   | 18.66% | 5.25% | 9.66%  | 9.72     | 7.76%      | 29.93%     | 11.2    |
 
-| Experiment                   | NIST1 | NIST2 | NIST3 | NIST4 | BLEU1  | BLEU2  | BLEU3  | BLEU4 | METEOR | entropy4 | diversity1 | diversity2 |
+We further conduct human evaluations (6K examples for each methods, each example is evaluated by 3 human judges). The results show a strong evidence that our generation quality is towards approaching the quality of real human responses, under this non-interactive Turing test:
+
+
+*Relevance*: A and B, which one is more relevant to the source prompt.
+
+| System A | A Wins (%) | Ties (%) | B Wins (%) | System B|
+|--------------------|-------|-------|--------|-------|
+|DialoGPT 345M|2671      (45%)   | 513         (9%) |   2816       (47%)| Human responses|
+|DialoGPT 345M| 3281       (72%)|    394         (9%)  |  882         (19%)| [PersonalityChat](https://docs.microsoft.com/en-us/azure/cognitive-services/project-personality-chat/overview)|
+
+*Informativeness*: A and B, which one is more contentful and informative. 
+
+| System A | A Wins (%) | Ties (%) | B Wins (%) | System B|
+|--------------------|-------|-------|--------|-------|
+|DialoGPT 345M| 2722       (45%) |  234         (4%) |  3044       (51%)| Human responses|
+|DialoGPT 345M|3490       (77%) |   206         (5%)  |  861         (19%)| [PersonalityChat](https://docs.microsoft.com/en-us/azure/cognitive-services/project-personality-chat/overview)|
+
+
+*Human-Like*: A and B, which one do you think is more likely to be generated by Human.
+
+| System A | A Wins (%) | Ties (%) | B Wins (%) | System B|
+|--------------------|-------|-------|--------|-------|
+|DialoGPT 345M|2716       (45%)  | 263         (4%)  | 3021       (50%)| Human responses|
+|DialoGPT 345M|3462       (76%) |  196         (4%)  | 899         (20%)| [PersonalityChat](https://docs.microsoft.com/en-us/azure/cognitive-services/project-personality-chat/overview)|
+
+
+Please see full details in our ArXiv paper (coming soon). 
+
+
+
+
+<!--Relevance
+System Wins      (%)         Ties        (%)         Losses   (%)
+2 vs 1     2671       (0.45)    513         (0.09)    2816       (0.47)
+2 vs 3     3281       (0.72)    394         (0.09)    882         (0.19)
+2 vs 4     2379       (0.40)    527         (0.09)    3094       (0.52)
+2 vs 5     3019       (0.50)    581         (0.10)    2400       (0.40)
+2 vs 6     2726       (0.45)    576         (0.10)    2698       (0.45)
+ 
+Informativeness
+System Wins      (%)         Ties        (%)         Losses   (%)
+2 vs 1     2722       (0.45)    234         (0.04)    3044       (0.51)
+2 vs 3     3490       (0.77)    206         (0.05)    861         (0.19)
+2 vs 4     2474       (0.41)    257         (0.04)    3269       (0.54)
+2 vs 5     3230       (0.54)    362         (0.06)    2408       (0.40)
+2 vs 6     2856       (0.48)    303         (0.05)    2841       (0.47)
+ 
+Human-Like
+System Wins      (%)         Ties        (%)         Losses   (%)
+2 vs 1     2716       (0.45)    263         (0.04)    3021       (0.50)
+2 vs 3     3462       (0.76)    196         (0.04)    899         (0.20)
+2 vs 4     2478       (0.41)    289         (0.05)    3233       (0.54)
+2 vs 5     3233       (0.54)    340         (0.06)    2427       (0.40)
+2 vs 6     2847       (0.47)    321         (0.05)    2832       (0.47)
+--> 
+
+
+<!--| Experiment                   | NIST1 | NIST2 | NIST3 | NIST4 | BLEU1  | BLEU2  | BLEU3  | BLEU4 | METEOR | ENT-4 | DIST-1 | DIST-2 |
 |------------------------------|-------|-------|-------|-------|--------|--------|--------|-------|--------|----------|------------|------------|
 | Human response               | 2.99  | 3.41  | 3.83  | 4.25  | 39.61% | 17.90% | 10.71% | 7.48% | 10.64% | 11       | 14.50%     | 63.00%     |
 | DialoGPT 117M      | 2.25  | 2.39  | 2.41  | 2.41  | 35.43% | 10.54% | 3.85%  | 1.55% | 7.53%  | 10.78    | 8.60%      | 39.90%     |
 | DialoGPT 345M      |**2.67** | **3**     | **3.05**  | **3.06**  | 40.97% | 16.96% | 8.31%  | 4.56% | **9.81%**  | 9.13     | 6.80%      | 26.30%     |
-| DialoGPT 762M      | 2.51  | 2.84  | 2.89  | 2.9   | **44.45%** | **18.66%** | **9.32%**  | **5.25%** | 9.66%  | **9.72**     | **7.76%**      | **29.93%**    |
+| DialoGPT 762M      | 2.51  | 2.84  | 2.89  | 2.9   | **44.45%** | **18.66%** | **9.32%**  | **5.25%** | 9.66%  | **9.72**     | **7.76%**      | **29.93%**    |-->
 
 <!--| DialoGPT 762M  (beam search)| 2.51  | 2.9   | 2.97  | 2.98  | 44.84% | 21.08% | 12.01% | 7.57% | 10.11% | 10.06    | 11.62%     | 44.07%     |-->
 <!--## ConvAI challenge -->
@@ -248,6 +321,20 @@ We test on 6K multi-ref dataset from Reddit (this test data will be release soon
 | Bot | You just have to be a millionaire by your early 20s, then you can be happy . |
 |User |This is so difficult ! |
 | Bot | You have no idea how hard it is to be a millionaire and happy . There is a reason the rich have a lot of money |
+
+* Multi-turn  self-playing  dialogue with user prompt
+
+|Role | Response |
+|---------|--------|
+|User | what is the meaning of life ?|
+| Bot | The  meaning  is  to  be  with  your  family  and friends .|
+|Bot | I’m going to guess :  It means that your par-ents and friends have loved you . That’s the meaning , I believe . |
+| Bot | I think  the  meaning  is  to  make  sure  you’re alive when you die . So you’ll be with your family , friends , and yourself .|
+|Bot |It’s not , but thanks for trying to help . |
+
+
+
+
 
 * Commonsense question answering examples
 
