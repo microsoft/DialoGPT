@@ -1,6 +1,6 @@
 # A State-of-the-Art Large-scale Pretrained Response generation model (DialoGPT)
 
-This repository contains the source code and trained model for a large-scale pretrained dialogue response generation model. The [human evaluation results](#human_eval) of our DialoGPT indicates that our results is comparable to human responses quality under a single-turn conversation Turing test.
+This repository contains the source code and trained model for a large-scale pretrained dialogue response generation model. The [human evaluation results](#human_eval) indicate that the response generated from DialoGPT is comparable to human response quality under a single-turn conversation Turing test.
 
 <!--See more details on our [project page](https://www.microsoft.com/en-us/research/project/large-scale-pretraining-for-response-generation/)-->
 
