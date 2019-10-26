@@ -1,6 +1,8 @@
 # A State-of-the-Art Large-scale Pretrained Response generation model (DialoGPT)
 
-This repository contains the source code and trained model for a large-scale pretrained dialogue response generation model. See more details on our [project page](https://www.microsoft.com/en-us/research/project/large-scale-pretraining-for-response-generation/)
+This repository contains the source code and trained model for a large-scale pretrained dialogue response generation model. The [human evaluation results](#human_eval) of our DialoGPT indicates that our results is comparable to human responses quality under a single-turn conversation Turing test.
+
+<!--See more details on our [project page](https://www.microsoft.com/en-us/research/project/large-scale-pretraining-for-response-generation/)-->
 
 The repository is based on [huggingface pytorch-transformer](https://github.com/huggingface/transfer-learning-conv-ai) and [OpenAI GPT-2](https://github.com/openai/gpt-2), containing data extraction script, model training code and pretrained small (117M) medium (345M) and large (762M) model checkpoint.
 
@@ -11,7 +13,7 @@ The include script can be used to reproduce the results of DSTC-7 grounded dialo
 Project webpage: [https://www.microsoft.com/en-us/research/project/large-scale-pretraining-for-response-generation/](https://www.microsoft.com/en-us/research/project/large-scale-pretraining-for-response-generation/)
 
 
-**This github repository will be updated soon. Please stay tuned.**
+<!--**This github repository will be updated soon. Please stay tuned.**-->
 ## Minimal Computational Configurations
 This code can be run on CPU, but it would be slow. We would recommend to use GPU to train and finetune all models. There is no minimal limit of the number of GPUs. However, if using distributed train for multiple GPUs configuration, the speed-up vs the number of GPUs is roughly sub-linear. To simulate the same batchsize when using less GPUs, please use a larger `gradient_accumulation_steps` in model training. 
 
@@ -184,8 +186,8 @@ Our model achieved the state-of-the-art results in [DSTC-7 Challenge response ge
 |--------------------|-------|-------|--------|-------|--------|----------|------------|------------|---------|
 | Human response     | 2.62  | 2.65  | 12.35% | 3.13% | 8.31%  | 10.45    | 16.66%     | 67.01%     | 18.8    |
 | DSTC-7 Winner      | 2.51  | 2.52  | 14.35% | 1.83% | 8.07%  | 9.03     | 10.89%     | 32.49%     | 15.1    |
-| DialoGPT 345M      | 2.80  | 2.82  | 14.16% | 2.31% | 8.51%  | 10.08    | 9.13%      | 39.73%     | 16.9    |
-| DialoGPT 345M (BS) | 2.92  | 2.97  | 19.18% | 6.05% | 9.29%  | 9.57     | 15.73%     | 51.03%     | 14.2    |
+| DialoGPT 345M      | 2.80  | 2.82  | 14.16% | 2.31% | 8.51%  | **10.08**    | 9.13%      | 39.73%     | 16.9    |
+| DialoGPT 345M (BS) | **2.92**  | **2.97**  | **19.18%** | **6.05%** | **9.29%**  | 9.57     | **15.73%**     | **51.03%**     | 14.2    |
 
 where ENT represents the [Entropy score](https://arxiv.org/abs/1809.05972), and DIST represents the [Distinct score](https://arxiv.org/pdf/1510.03055.pdf). For all metrics except the average length, larger are better.  
 
@@ -234,6 +236,8 @@ The evaluation results will be generated in the folder `./dstc/eval/`
 
 ## 6K multi-ref dataset result
 
+### Automatic evaluation
+
 We test on 6K multi-ref dataset from Reddit (this test data will be release soon). The results are summarized in below
 
 | Experiment         | NIST2 | NIST4 | BLEU2  | BLEU4 | METEOR | ENT-4 | DIST-1 | DIST-2 | Avg. Len |
@@ -242,6 +246,10 @@ We test on 6K multi-ref dataset from Reddit (this test data will be release soon
 | DialoGPT 117M      | 2.39  | 2.41  | 10.54% | 1.55% | 7.53%  | 10.78    | 8.60%      | 39.90%     | 12.8    |
 | DialoGPT 345M      | 3     | 3.06  | 16.96% | 4.56% | 9.81%  | 9.13     | 6.80%      | 26.30%     | 12.2    |
 | DialoGPT 762M      | 2.84  | 2.9   | 18.66% | 5.25% | 9.66%  | 9.72     | 7.76%      | 29.93%     | 11.2    |
+| DialoGPT 345M (BS) | **3.4**  | **3.5**   | **21.76%** | **7.92%** | 10.74%  | 10.48     | **12.38%**     | **48.74%**    | 11.3    |
+| DialoGPT 345M (w/MMI)| 3.28  | 3.33 | 15.68% | 3.94% | **11.23%**  | **11.25**     | 9.39%    | 45.55%   | 17.2    |
+
+### <a name="human_eval"></a>Human evaluation 
 
 We further conduct human evaluations (6K examples for each methods, each example is evaluated by 3 human judges). The results show a strong evidence that our generation quality is towards approaching the quality of real human responses, under this non-interactive Turing test:
 
@@ -252,6 +260,7 @@ We further conduct human evaluations (6K examples for each methods, each example
 |--------------------|-------|-------|--------|-------|
 |DialoGPT 345M|2671      (45%)   | 513         (9%) |   2816       (47%)| Human responses|
 |DialoGPT 345M| 3281       (72%)|    394         (9%)  |  882         (19%)| [PersonalityChat](https://docs.microsoft.com/en-us/azure/cognitive-services/project-personality-chat/overview)|
+|DialoGPT 345M w/ MMI| **2871**     (48%)|    522         (9%)  |  2607      (43%)| Human responses|
 
 *Informativeness*: A and B, which one is more contentful and informative. 
 
@@ -259,6 +268,7 @@ We further conduct human evaluations (6K examples for each methods, each example
 |--------------------|-------|-------|--------|-------|
 |DialoGPT 345M| 2722       (45%) |  234         (4%) |  3044       (51%)| Human responses|
 |DialoGPT 345M|3490       (77%) |   206         (5%)  |  861         (19%)| [PersonalityChat](https://docs.microsoft.com/en-us/azure/cognitive-services/project-personality-chat/overview)|
+|DialoGPT 345M w/ MMI| **3011**       (50%)|    234        (4%)  |  2755       (46%)| Human responses|
 
 
 *Human-Like*: A and B, which one do you think is more likely to be generated by Human.
@@ -267,9 +277,10 @@ We further conduct human evaluations (6K examples for each methods, each example
 |--------------------|-------|-------|--------|-------|
 |DialoGPT 345M|2716       (45%)  | 263         (4%)  | 3021       (50%)| Human responses|
 |DialoGPT 345M|3462       (76%) |  196         (4%)  | 899         (20%)| [PersonalityChat](https://docs.microsoft.com/en-us/azure/cognitive-services/project-personality-chat/overview)|
+|DialoGPT 345M w/ MMI| **2978**      (50%)|    241         (4%)  |  2781        (46%)| Human responses|
 
 
-Please see full details in our ArXiv paper (coming soon). 
+Please see full details in our arXiv paper (coming soon). 
 
 
 
