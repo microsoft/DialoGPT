@@ -13,6 +13,8 @@ The include script can be used to reproduce the results of DSTC-7 grounded dialo
 Project webpage: [https://www.microsoft.com/en-us/research/project/large-scale-pretraining-for-response-generation/](https://www.microsoft.com/en-us/research/project/large-scale-pretraining-for-response-generation/)
 
 
+
+
 <!--**This github repository will be updated soon. Please stay tuned.**-->
 ## Minimal Computational Configurations
 This code can be run on CPU, but it would be slow. We would recommend to use GPU to train and finetune all models. There is no minimal limit of the number of GPUs. However, if using distributed train for multiple GPUs configuration, the speed-up vs the number of GPUs is roughly sub-linear. To simulate the same batchsize when using less GPUs, please use a larger `gradient_accumulation_steps` in model training. 
@@ -475,6 +477,10 @@ top_p | `float` | `0.9` | Nucleus filtering (top-p) before sampling (`<=0.0`: no
 
 * Pretrained UniLM: [https://github.com/microsoft/unilm](https://github.com/microsoft/unilm)
 * MT-DNN: [https://github.com/namisan/mt-dnn](https://github.com/namisan/mt-dnn)
+
+## Contact
+
+Please contact [DialoGPT@microsoft.com](mailto:DialoGPT@microsoft.com) if you have any questions/suggestions. However, the response will be sporadic. Please expected delays.
 
 ## Contributing
 
