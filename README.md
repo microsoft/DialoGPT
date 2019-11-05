@@ -503,15 +503,17 @@ This repository aims to facilitate research in large-scale pretraining for conve
 
 
 ## Citation
-
-To be updated.
-
-<!--If you use this code in your research, you can cite our [arxiv paper]():
-
+If you use this code in your research, you can cite our [arxiv paper](https://arxiv.org/abs/1911.00536):
 ```bash
-@article{
+@misc{zhang2019dialogpt,
+    title={DialoGPT: Large-Scale Generative Pre-training for Conversational Response Generation},
+    author={Yizhe Zhang and Siqi Sun and Michel Galley and Yen-Chun Chen and Chris Brockett and Xiang Gao and Jianfeng Gao and Jingjing Liu and Bill Dolan},
+    year={2019},
+    eprint={1911.00536},
+    archivePrefix={arXiv},
+    primaryClass={cs.CL}
 }
 ```
--->
+
 
 
