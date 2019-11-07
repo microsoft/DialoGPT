@@ -114,8 +114,8 @@ The small Reddit data is around 140MB and the full Reddit data is more than 30GB
 
 #### Pretrained model
 
-The pretrained and fine-tuned models are available on azure blobstorage [here](https://convaisharables.blob.core.windows.net/lsp).
-Please run/see `demo.py` for more details about how to download/use those models. 
+The pretrained and fine-tuned models are available on azure blobstorage.
+Please run/see `demo.py` for more details about how to download/use those models. Or you could download directly by using the links in `demo_utils.py`.
 
 #### Preparing data
 First, use the `prepare4db.sh` to convert a tsv data file into the correct format that the following script can recognize.
