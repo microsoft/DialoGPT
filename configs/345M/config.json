@@ -1,0 +1,15 @@
+{
+  "attn_pdrop": 0.1,
+  "embd_pdrop": 0.1,
+  "initializer_range": 0.02,
+  "layer_norm_epsilon": 1e-05,
+  "n_ctx": 1024,
+  "n_embd": 1024,
+  "n_head": 16,
+  "n_layer": 24,
+  "n_positions": 1024,
+  "n_special": 0,
+  "predict_special_tokens": true,
+  "resid_pdrop": 0.1,
+  "vocab_size": 50257
+}

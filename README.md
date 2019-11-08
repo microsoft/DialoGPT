@@ -174,7 +174,7 @@ We release 6 fine-tuned models which can be further fine-tuned on low-resource  
 | DialoGPT 345M model| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/medium_ft.pkl) |
 | DialoGPT 117M model| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/small_ft.pkl) |
 
-The model files can be loaded exactly as the GPT-2 model checkpoint from Huggingface [pytorch-transformer](https://github.com/huggingface/transformers). Please download the model configuration files (*.merge, *.config, *.vocab) from `./configs/*`.
+The model files can be loaded exactly as the GPT-2 model checkpoint from Huggingface [pytorch-transformer](https://github.com/huggingface/transformers). Please download the required model configuration files (`merges.txt`, `config,json`, `vocab.json`) from `./configs/*`.
 
 
 ## Evaluations
