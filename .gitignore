@@ -332,7 +332,7 @@ ASALocalRun/
 
 # preprocessed data caused by testing
 tests/corpus/*.db
-*.txt
+
 
 # Initially taken from Github's Python gitignore file
 
