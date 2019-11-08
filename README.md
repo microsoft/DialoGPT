@@ -12,7 +12,7 @@ The include script can be used to reproduce the results of DSTC-7 grounded dialo
 
 Project webpage: [https://www.microsoft.com/en-us/research/project/large-scale-pretraining-for-response-generation/](https://www.microsoft.com/en-us/research/project/large-scale-pretraining-for-response-generation/)
 
-
+ArXiv paper: [https://arxiv.org/abs/1911.00536](https://arxiv.org/abs/1911.00536)
 
 
 <!--**This github repository will be updated soon. Please stay tuned.**-->
@@ -174,7 +174,7 @@ We release 6 fine-tuned models which can be further fine-tuned on low-resource  
 | DialoGPT 345M model| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/medium_ft.pkl) |
 | DialoGPT 117M model| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/small_ft.pkl) |
 
-The model files can be loaded exactly as the GPT-2 model checkpoint from Huggingface pytorch-transformer repository. 
+The model files can be loaded exactly as the GPT-2 model checkpoint from Huggingface [pytorch-transformer](https://github.com/huggingface/transformers). Please download the model configuration files (*.merge, *.config, *.vocab) from `./configs/*`.
 
 
 ## Evaluations
@@ -282,7 +282,7 @@ We further conduct human evaluations (6K examples for each methods, each example
 |DialoGPT 345M w/ MMI| **2978**      (50%)|    241         (4%)  |  2781        (46%)| Human responses|
 
 
-Please see full details in our arXiv paper (coming soon). 
+Please see full details in our [arxiv paper](https://arxiv.org/abs/1911.00536). 
 
 
 
@@ -341,7 +341,7 @@ System Wins      (%)         Ties        (%)         Losses   (%)
 |---------|--------|
 |User | what is the meaning of life ?|
 | Bot | The  meaning  is  to  be  with  your  family  and friends .|
-|Bot | I’m going to guess :  It means that your par-ents and friends have loved you . That’s the meaning , I believe . |
+|Bot | I’m going to guess :  It means that your parents and friends have loved you . That’s the meaning , I believe . |
 | Bot | I think  the  meaning  is  to  make  sure  you’re alive when you die . So you’ll be with your family , friends , and yourself .|
 |Bot |It’s not , but thanks for trying to help . |
 
@@ -480,7 +480,7 @@ top_p | `float` | `0.9` | Nucleus filtering (top-p) before sampling (`<=0.0`: no
 
 ## Contact
 
-Please contact [DialoGPT@microsoft.com](mailto:DialoGPT@microsoft.com) if you have any questions/suggestions. However, the response will be sporadic. Please expected delays.
+Please contact [DialoGPT@microsoft.com](mailto:DialoGPT@microsoft.com) if you have any questions/suggestions. However, the response will be sporadic. Please expect delay.
 
 ## Contributing
 
