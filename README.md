@@ -163,18 +163,26 @@ The log file and saved model checkpoint can be found in `./models/output_model`
 We note that even with properly filtered Reddit dataset, sometimes our model can still generate moderately toxic/inappropriate responses. Due to this reason, we are unable to provide the decoding script at this time (The live demo and decoding script access is upon invitation only now ).
 We are currently still working on a controlled decoding method to prevent this system from toxic generation. Please stay tuned. 
 
+**See issues [#3](#3) and [Reddit discussions](https://www.reddit.com/r/MachineLearning/comments/dt5woy/p_dialogpt_state_of_the_art_conversational_model/) for some discussions on third-party decoding methods.** 
+
 
 ## Models
 
 We release 6 fine-tuned models which can be further fine-tuned on low-resource  user-customized dataset. The total parameters in these models range from 117M to 762M, in accord with OpenAI GPT-2 model sizes.   
 
-| Model           |  Download|
-|----------------------|--------|
-| DialoGPT 762M model| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/large_ft.pkl) |
-| DialoGPT 345M model| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/medium_ft.pkl) |
-| DialoGPT 117M model| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/small_ft.pkl) |
+| Model           |  Fine-tuned from GPT-2| Trained from scratch
+|----------------------|--------|--------|
+| DialoGPT 762M model| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/large_ft.pkl) | [link](https://convaisharables.blob.core.windows.net/lsp/multiref/large_fs.pkl) |
+| DialoGPT 345M model| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/medium_ft.pkl) | [link](https://convaisharables.blob.core.windows.net/lsp/multiref/medium_fs.pkl) | 
+| DialoGPT 117M model| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/small_ft.pkl) | [link](https://convaisharables.blob.core.windows.net/lsp/multiref/small_fs.pkl) | 
+| DialoGPT 345M model (reverse, for MMI)| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/small_reverse.pkl) | -| 
+
+
+
 
 The model files can be loaded exactly as the GPT-2 model checkpoint from Huggingface [pytorch-transformer](https://github.com/huggingface/transformers). Please download the required model configuration files (`merges.txt`, `config,json`, `vocab.json`) from `./configs/*`.
+
+The reverse model is predicting the source from the target. This model is used  for MMI reranking. 
 
 
 ## Evaluations
