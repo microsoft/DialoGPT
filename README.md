@@ -21,12 +21,12 @@ This code can be run on CPU, but it would be slow. We would recommend to use GPU
 
 The 117M and 345M model can be loaded in a single GPU with 12G memory. The 762M model would require a single GPU that has greater than 16G memory for efficient training. The training speed on a benchmark data with 50M training instances and V100 GPUs:
 
-| n\_gpu           | epoch time (min) | token/sec  |
+| n\_gpu           | epoch time (h) | token/sec  |
 |----------------------|--------|--------|
-| 1              | 158 | 25466 |
-| 2              | 96 | 41861 |
-| 4              | 73 | 54994 |
-| 8              | 65 | 63612 |
+| 1              | 118 | 25466 |
+| 2              | 62 | 41861 |
+| 4              | 34 | 54994 |
+| 8              | 18 | 63612 |
 
 Fine-tuning from our pretrained model on a new dataset typically requires 1-2 epochs.
 
