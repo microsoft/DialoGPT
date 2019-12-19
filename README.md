@@ -485,6 +485,7 @@ top_p | `float` | `0.9` | Nucleus filtering (top-p) before sampling (`<=0.0`: no
 
 * Pretrained UniLM: [https://github.com/microsoft/unilm](https://github.com/microsoft/unilm)
 * MT-DNN: [https://github.com/namisan/mt-dnn](https://github.com/namisan/mt-dnn)
+* A chinese counterpart of DialoGPT by yangjianxin1. [https://github.com/yangjianxin1/GPT2-chitchat](https://github.com/yangjianxin1/GPT2-chitchat). We are glad to see that the MMI strategy that we used in DialoGPT has also improved the performance for this project as well!
 
 ## Contact
 
