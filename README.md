@@ -23,10 +23,10 @@ The 117M and 345M model can be loaded in a single GPU with 12G memory. The 762M 
 
 | n\_gpu           | epoch time (h) | token/sec  |
 |----------------------|--------|--------|
-| 1              | 118 | 25466 |
-| 2              | 62 | 41861 |
-| 4              | 34 | 54994 |
-| 8              | 18 | 63612 |
+| 1              | 118 | 10847 |
+| 2              | 62 | 20645 |
+| 4              | 34 | 37647 |
+| 8              | 18 | 71356 |
 
 Fine-tuning from our pretrained model on a new dataset typically requires 1-2 epochs.
 
