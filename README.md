@@ -21,12 +21,12 @@ This code can be run on CPU, but it would be slow. We would recommend to use GPU
 
 The 117M and 345M model can be loaded in a single GPU with 12G memory. The 762M model would require a single GPU that has greater than 16G memory for efficient training. The training speed on a benchmark data with 50M training instances and V100 GPUs:
 
-| n\_gpu           | epoch time (min) | token/sec  |
+| n\_gpu           | epoch time (h) | token/sec  |
 |----------------------|--------|--------|
-| 1              | 158 | 25466 |
-| 2              | 96 | 41861 |
-| 4              | 73 | 54994 |
-| 8              | 65 | 63612 |
+| 1              | 118 | 10847 |
+| 2              | 62 | 20645 |
+| 4              | 34 | 37647 |
+| 8              | 18 | 71356 |
 
 Fine-tuning from our pretrained model on a new dataset typically requires 1-2 epochs.
 
@@ -505,6 +505,7 @@ top_p | `float` | `0.9` | Nucleus filtering (top-p) before sampling (`<=0.0`: no
 
 * Pretrained UniLM: [https://github.com/microsoft/unilm](https://github.com/microsoft/unilm)
 * MT-DNN: [https://github.com/namisan/mt-dnn](https://github.com/namisan/mt-dnn)
+* A chinese counterpart of DialoGPT by yangjianxin1. [https://github.com/yangjianxin1/GPT2-chitchat](https://github.com/yangjianxin1/GPT2-chitchat). We are glad to see that the MMI strategy that we used in DialoGPT has also improved the performance for this project as well!
 
 ## Contact
 
