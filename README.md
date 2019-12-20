@@ -110,7 +110,7 @@ python demo.py --data small
 python demo.py --data full
 ```
 
-The small Reddit data is around 140MB and the full Reddit data is more than 30GB. You can prepare a cup of coffee when processing with the full Reddit data because **it takes a long time**!
+The small Reddit data is around 140MB and the full Reddit data is more than 27GB. You can prepare a cup of coffee when processing with the full Reddit data because **it takes a long time**!
 
 #### Pretrained model
 
@@ -183,6 +183,26 @@ We release 6 fine-tuned models which can be further fine-tuned on low-resource  
 The model files can be loaded exactly as the GPT-2 model checkpoint from Huggingface [pytorch-transformer](https://github.com/huggingface/transformers). Please download the required model configuration files (`merges.txt`, `config,json`, `vocab.json`) from `./configs/*`.
 
 The reverse model is predicting the source from the target. This model is used  for MMI reranking. 
+
+## Retraining full models
+
+### Preparation
+
+The first step to retrain the full models is to generate the aforementioned 27GB Reddit dataset. This involves downloading full Reddit submission and comments dumps from [https://files.pushshift.io/reddit](https://files.pushshift.io/reddit) and creating intermediate files, which overall require **700GB of local disk space**. Downloading and processing the full data requires about 1-2 days, depending on your (CPU) compute capabilties (e.g., ~24 hours with 8 cores on a recent computer). Assuming you ran the above setup and installation steps (conda activate LSP, etc.), you can create the full dataset by running either:
+
+```
+python demo.py --data full
+```
+or
+```
+cd reddit_extractor; SIZE=full make -j 8; cd ..
+```
+
+The former command calls the latter, so the two methods are equivalent. We recommend the former, as the latter is mostly useful if you run into any problem or want to customize any arguments (e.g., the `make` command lets you build only a subset of the data). Note that the downloading phase can be error prone, for example based on your geolocation (firewall, etc.). If the above commands fail to generate `data/train.tsv`, or if that file is not anywhere close to 27GB, it means something went wrong. In that case, you may want to inspect `reddit_extractor/wget-log` and `reddit_extractor/logs/*.log` for any obvious error (e.g., wget unable to download from pushshift.io). If error messages don't make sense to you, feel free to contact us. If so, please be sure to include any error messages gathered from these log files.
+
+### Training
+
+We recommand generating the above data using the `demo.py --data full`, as it (1) generates the data, (2) converts it into DB format, and (3) trains a model using `python LSP_train.py`. Please directly edit `demo.py` if you want to customize any of the hyperparameters.
 
 
 ## Evaluations

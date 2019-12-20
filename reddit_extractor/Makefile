@@ -91,4 +91,4 @@ $K/.create: data/keys-$(SIZE).tar
 	tar xvf $<
 
 data/keys-full.tar:
-	wget https://convaisharables.blob.core.windows.net/lsp/keys-full.tar
+	wget https://convaisharables.blob.core.windows.net/lsp/keys-full.tar -O data/keys-full.tar
