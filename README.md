@@ -200,6 +200,9 @@ cd reddit_extractor; SIZE=full make -j 8; cd ..
 
 The former command calls the latter, so the two methods are equivalent. We recommend the former, as the latter is mostly useful if you run into any problem or want to customize any arguments (e.g., the `make` command lets you build only a subset of the data). Note that the downloading phase can be error prone, for example based on your geolocation (firewall, etc.). If the above commands fail to generate `data/train.tsv`, or if that file is not anywhere close to 27GB, it means something went wrong. In that case, you may want to inspect `reddit_extractor/wget-log` and `reddit_extractor/logs/*.log` for any obvious error (e.g., wget unable to download from pushshift.io). If error messages don't make sense to you, feel free to contact us. If so, please be sure to include any error messages gathered from these log files.
 
+Training data statistics: the generated training tsv file should be roughly 26.8 GB uncompressed, with 146.8M training instances, 3.87B source tokens, and 2.14B target tokens (including utterance-level 0/1 weights).
+
+
 ### Training
 
 We recommand generating the above data using the `demo.py --data full`, as it (1) generates the data, (2) converts it into DB format, and (3) trains a model using `python LSP_train.py`. Please directly edit `demo.py` if you want to customize any of the hyperparameters.
