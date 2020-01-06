@@ -15,6 +15,14 @@ Project webpage: [https://www.microsoft.com/en-us/research/project/large-scale-p
 ArXiv paper: [https://arxiv.org/abs/1911.00536](https://arxiv.org/abs/1911.00536)
 
 
+## *** Update 01/06/2020 *** ##
+*** Some third-party decoding script implementations: ***
+- [https://colab.research.google.com/drive/1PslHE4Rl4RqSa20s7HEp0ZKITBir6ezE](https://colab.research.google.com/drive/1PslHE4Rl4RqSa20s7HEp0ZKITBir6ezE) A colab interactive notebook by qywu,[ref](https://github.com/microsoft/DialoGPT/issues/3#issuecomment-551410203)
+- [https://github.com/andreamad8/DialoGPT2-Interact](https://github.com/andreamad8/DialoGPT2-Interact) An interactive script featuring multiturn chatbot by andreamad8,[ref](https://github.com/microsoft/DialoGPT/issues/3#issuecomment-551450016)
+- [https://github.com/LHolten/DialoGTP-MMI-decoder](https://github.com/LHolten/DialoGTP-MMI-decoder) An MMI implementation by LHolten,[ref](https://github.com/microsoft/DialoGPT/issues/3#issuecomment-558318401)
+- [https://colab.research.google.com/drive/1-_KjlAV3J1IVDw_9KogjKDCzgFY7Jp7E](https://colab.research.google.com/drive/1-_KjlAV3J1IVDw_9KogjKDCzgFY7Jp7E) A colab interactive notebook by illuminascent@Reddit,[ref](https://www.reddit.com/r/MachineLearning/comments/dt5woy/p_dialogpt_state_of_the_art_conversational_model/?st=k530k3oo&sh=f6cd20fd)
+
+
 <!--**This github repository will be updated soon. Please stay tuned.**-->
 ## Minimal Computational Configurations
 This code can be run on CPU, but it would be slow. We would recommend to use GPU to train and finetune all models. There is no minimal limit of the number of GPUs. However, if using distributed train for multiple GPUs configuration, the speed-up vs the number of GPUs is roughly sub-linear. To simulate the same batchsize when using less GPUs, please use a larger `gradient_accumulation_steps` in model training. 
@@ -164,6 +172,12 @@ We note that even with properly filtered Reddit dataset, sometimes our model can
 We are currently still working on a controlled decoding method to prevent this system from toxic generation. Please stay tuned. 
 
 **See issues [#3](https://github.com/microsoft/DialoGPT/issues/3) and [Reddit discussions](https://www.reddit.com/r/MachineLearning/comments/dt5woy/p_dialogpt_state_of_the_art_conversational_model/) for some discussions on third-party decoding methods.** 
+
+See below for some third-party decoding methods:
+- [https://colab.research.google.com/drive/1PslHE4Rl4RqSa20s7HEp0ZKITBir6ezE](https://colab.research.google.com/drive/1PslHE4Rl4RqSa20s7HEp0ZKITBir6ezE) A colab interactive notebook by qywu,[ref](https://github.com/microsoft/DialoGPT/issues/3#issuecomment-551410203)
+- [https://github.com/andreamad8/DialoGPT2-Interact](https://github.com/andreamad8/DialoGPT2-Interact) An interactive script featuring multiturn chatbot by andreamad8,[ref](https://github.com/microsoft/DialoGPT/issues/3#issuecomment-551450016)
+- [https://github.com/LHolten/DialoGTP-MMI-decoder](https://github.com/LHolten/DialoGTP-MMI-decoder) An MMI implementation by LHolten,[ref](https://github.com/microsoft/DialoGPT/issues/3#issuecomment-558318401)
+- [https://colab.research.google.com/drive/1-_KjlAV3J1IVDw_9KogjKDCzgFY7Jp7E](https://colab.research.google.com/drive/1-_KjlAV3J1IVDw_9KogjKDCzgFY7Jp7E) A colab interactive notebook by illuminascent@Reddit,[ref](https://www.reddit.com/r/MachineLearning/comments/dt5woy/p_dialogpt_state_of_the_art_conversational_model/?st=k530k3oo&sh=f6cd20fd)
 
 
 ## Models
