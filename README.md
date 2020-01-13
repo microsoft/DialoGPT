@@ -17,6 +17,7 @@ ArXiv paper: [https://arxiv.org/abs/1911.00536](https://arxiv.org/abs/1911.00536
 
 ## News ##
 ***(Update 01/06/2020) Some third-party decoding script implementations:***
+- [https://github.com/polakowo/gpt2bot](https://github.com/polakowo/gpt2bot) GPT2Bot implementation based on telegram by polakowo, [ref](https://github.com/microsoft/DialoGPT/issues/3#issuecomment-573904419)
 - [https://colab.research.google.com/drive/1PslHE4Rl4RqSa20s7HEp0ZKITBir6ezE](https://colab.research.google.com/drive/1PslHE4Rl4RqSa20s7HEp0ZKITBir6ezE) A colab interactive notebook by qywu,[ref](https://github.com/microsoft/DialoGPT/issues/3#issuecomment-551410203)
 - [https://github.com/andreamad8/DialoGPT2-Interact](https://github.com/andreamad8/DialoGPT2-Interact) An interactive script featuring multiturn chatbot by andreamad8,[ref](https://github.com/microsoft/DialoGPT/issues/3#issuecomment-551450016)
 - [https://github.com/LHolten/DialoGTP-MMI-decoder](https://github.com/LHolten/DialoGTP-MMI-decoder) An MMI implementation by LHolten,[ref](https://github.com/microsoft/DialoGPT/issues/3#issuecomment-558318401)
@@ -174,6 +175,7 @@ We are currently still working on a controlled decoding method to prevent this s
 **See issues [#3](https://github.com/microsoft/DialoGPT/issues/3) and [Reddit discussions](https://www.reddit.com/r/MachineLearning/comments/dt5woy/p_dialogpt_state_of_the_art_conversational_model/) for some discussions on third-party decoding methods.** 
 
 See below for some third-party decoding methods:
+- [https://github.com/polakowo/gpt2bot](https://github.com/polakowo/gpt2bot) GPT2Bot implementation based on telegram by polakowo, [ref](https://github.com/microsoft/DialoGPT/issues/3#issuecomment-573904419)
 - [https://colab.research.google.com/drive/1PslHE4Rl4RqSa20s7HEp0ZKITBir6ezE](https://colab.research.google.com/drive/1PslHE4Rl4RqSa20s7HEp0ZKITBir6ezE) A colab interactive notebook by qywu,[ref](https://github.com/microsoft/DialoGPT/issues/3#issuecomment-551410203)
 - [https://github.com/andreamad8/DialoGPT2-Interact](https://github.com/andreamad8/DialoGPT2-Interact) An interactive script featuring multiturn chatbot by andreamad8,[ref](https://github.com/microsoft/DialoGPT/issues/3#issuecomment-551450016)
 - [https://github.com/LHolten/DialoGTP-MMI-decoder](https://github.com/LHolten/DialoGTP-MMI-decoder) An MMI implementation by LHolten,[ref](https://github.com/microsoft/DialoGPT/issues/3#issuecomment-558318401)
