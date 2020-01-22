@@ -482,7 +482,7 @@ if args.freq_words:
 		for line in f:
 			n += 1
 			w = line.rstrip().lower()
-			freq_words[w] = n
+			args.freq_words[w] = n
 
 if args.bl_words:
 	with open(args.bl_words, 'rt', encoding="utf-8") as f:
