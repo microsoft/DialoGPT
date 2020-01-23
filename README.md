@@ -1,4 +1,4 @@
-# A State-of-the-Art Large-scale Pretrained Response generation model (DialoGPT)
+# A State-of-the-Art Large-scale Pretrained Response Generation Model (DialoGPT)
 
 This repository contains the source code and trained model for a large-scale pretrained dialogue response generation model. The [human evaluation results](#human_eval) indicate that the response generated from DialoGPT is comparable to human response quality under a single-turn conversation Turing test.
 
