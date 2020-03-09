@@ -196,7 +196,7 @@ We release 6 fine-tuned models which can be further fine-tuned on low-resource  
 
 
 
-The model files can be loaded exactly as the GPT-2 model checkpoint from Huggingface [pytorch-transformer](https://github.com/huggingface/transformers). Please download the required model configuration files (`merges.txt`, `config,json`, `vocab.json`) from `./configs/*`.
+The model files can be loaded exactly as the GPT-2 model checkpoints from Huggingface's [Transformers](https://github.com/huggingface/transformers). You can find the corresponding configuration files (`merges.txt`, `config.json`, `vocab.json`) in DialoGPT's repo in `./configs/*`.
 
 The reverse model is predicting the source from the target. This model is used  for MMI reranking. 
 
