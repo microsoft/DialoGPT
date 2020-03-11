@@ -16,17 +16,21 @@ ArXiv paper: [https://arxiv.org/abs/1911.00536](https://arxiv.org/abs/1911.00536
 
 
 ## News ##
-***(Update 03/10/2020) Model cards available on Huggingface transformer!:***
+***(Update 03/10/2020) Model cards available on Huggingface transformer!***
+
 Please check out our model cards on huggingface transformer. With several lines of code it should be pretty straighforward to play with the DialoGPT interactively. 
 
-[small model](https://huggingface.co/microsoft/DialoGPT-small)
-[medium model](https://huggingface.co/microsoft/DialoGPT-medium)
-[large model](https://huggingface.co/microsoft/DialoGPT-large)
+[small model: https://huggingface.co/microsoft/DialoGPT-small](https://huggingface.co/microsoft/DialoGPT-small)
+
+[medium model: https://huggingface.co/microsoft/DialoGPT-medium](https://huggingface.co/microsoft/DialoGPT-medium)
+
+[large model: https://huggingface.co/microsoft/DialoGPT-large](https://huggingface.co/microsoft/DialoGPT-large)
 
 
 
 
 ***(Update 01/06/2020) Some third-party decoding script implementations:***
+
 - [https://github.com/polakowo/gpt2bot](https://github.com/polakowo/gpt2bot) GPT2Bot implementation based on telegram by polakowo, [ref](https://github.com/microsoft/DialoGPT/issues/3#issuecomment-573904419)
 - [https://colab.research.google.com/drive/1PslHE4Rl4RqSa20s7HEp0ZKITBir6ezE](https://colab.research.google.com/drive/1PslHE4Rl4RqSa20s7HEp0ZKITBir6ezE) A colab interactive notebook by qywu,[ref](https://github.com/microsoft/DialoGPT/issues/3#issuecomment-551410203)
 - [https://github.com/andreamad8/DialoGPT2-Interact](https://github.com/andreamad8/DialoGPT2-Interact) An interactive script featuring multiturn chatbot by andreamad8,[ref](https://github.com/microsoft/DialoGPT/issues/3#issuecomment-551450016)
