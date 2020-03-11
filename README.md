@@ -202,9 +202,9 @@ We release 6 fine-tuned models which can be further fine-tuned on low-resource  
 
 | Model           |  Fine-tuned from GPT-2| Trained from scratch
 |----------------------|--------|--------|
-| DialoGPT 762M model| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/large_ft.pkl [huggingface model card](https://huggingface.co/microsoft/DialoGPT-large))  | [link](https://convaisharables.blob.core.windows.net/lsp/multiref/large_fs.pkl) |
-| DialoGPT 345M model| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/medium_ft.pkl) [huggingface model card](https://huggingface.co/microsoft/DialoGPT-medium) | [link](https://convaisharables.blob.core.windows.net/lsp/multiref/medium_fs.pkl) | 
-| DialoGPT 117M model| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/small_ft.pkl) [huggingface model card](https://huggingface.co/microsoft/DialoGPT-small)| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/small_fs.pkl) | 
+| DialoGPT 762M model| [\[link\]](https://convaisharables.blob.core.windows.net/lsp/multiref/large_ft.pkl) [\[huggingface model card\]](https://huggingface.co/microsoft/DialoGPT-large)  | [\[link\]](https://convaisharables.blob.core.windows.net/lsp/multiref/large_fs.pkl) |
+| DialoGPT 345M model| [\[link\]](https://convaisharables.blob.core.windows.net/lsp/multiref/medium_ft.pkl) [\[huggingface model card\]](https://huggingface.co/microsoft/DialoGPT-medium) | [\[link\]](https://convaisharables.blob.core.windows.net/lsp/multiref/medium_fs.pkl) | 
+| DialoGPT 117M model| [\[link\]](https://convaisharables.blob.core.windows.net/lsp/multiref/small_ft.pkl) [\[huggingface model card\]](https://huggingface.co/microsoft/DialoGPT-small)| [\[link\]](https://convaisharables.blob.core.windows.net/lsp/multiref/small_fs.pkl) | 
 | DialoGPT 345M model (reverse, for MMI)| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/small_reverse.pkl) | -| 
 
 
