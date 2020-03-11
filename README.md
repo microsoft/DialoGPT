@@ -16,6 +16,16 @@ ArXiv paper: [https://arxiv.org/abs/1911.00536](https://arxiv.org/abs/1911.00536
 
 
 ## News ##
+***(Update 03/10/2020) Model cards available on Huggingface transformer!:***
+Please check out our model cards on huggingface transformer. With several lines of code it should be pretty straighforward to play with the DialoGPT interactively. 
+
+[small model](https://huggingface.co/microsoft/DialoGPT-small)
+[medium model](https://huggingface.co/microsoft/DialoGPT-medium)
+[large model](https://huggingface.co/microsoft/DialoGPT-large)
+
+
+
+
 ***(Update 01/06/2020) Some third-party decoding script implementations:***
 - [https://github.com/polakowo/gpt2bot](https://github.com/polakowo/gpt2bot) GPT2Bot implementation based on telegram by polakowo, [ref](https://github.com/microsoft/DialoGPT/issues/3#issuecomment-573904419)
 - [https://colab.research.google.com/drive/1PslHE4Rl4RqSa20s7HEp0ZKITBir6ezE](https://colab.research.google.com/drive/1PslHE4Rl4RqSa20s7HEp0ZKITBir6ezE) A colab interactive notebook by qywu,[ref](https://github.com/microsoft/DialoGPT/issues/3#issuecomment-551410203)
@@ -188,11 +198,10 @@ We release 6 fine-tuned models which can be further fine-tuned on low-resource  
 
 | Model           |  Fine-tuned from GPT-2| Trained from scratch
 |----------------------|--------|--------|
-| DialoGPT 762M model| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/large_ft.pkl) | [link](https://convaisharables.blob.core.windows.net/lsp/multiref/large_fs.pkl) |
-| DialoGPT 345M model| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/medium_ft.pkl) | [link](https://convaisharables.blob.core.windows.net/lsp/multiref/medium_fs.pkl) | 
-| DialoGPT 117M model| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/small_ft.pkl) | [link](https://convaisharables.blob.core.windows.net/lsp/multiref/small_fs.pkl) | 
+| DialoGPT 762M model| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/large_ft.pkl [huggingface model card](https://huggingface.co/microsoft/DialoGPT-large))  | [link](https://convaisharables.blob.core.windows.net/lsp/multiref/large_fs.pkl) |
+| DialoGPT 345M model| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/medium_ft.pkl) [huggingface model card](https://huggingface.co/microsoft/DialoGPT-medium) | [link](https://convaisharables.blob.core.windows.net/lsp/multiref/medium_fs.pkl) | 
+| DialoGPT 117M model| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/small_ft.pkl) [huggingface model card](https://huggingface.co/microsoft/DialoGPT-small)| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/small_fs.pkl) | 
 | DialoGPT 345M model (reverse, for MMI)| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/small_reverse.pkl) | -| 
-
 
 
 
