@@ -16,9 +16,9 @@ ArXiv paper: [https://arxiv.org/abs/1911.00536](https://arxiv.org/abs/1911.00536
 
 
 ## News ##
-***(Update 03/10/2020) Model cards available on Huggingface transformer!***
+***(Update 03/10/2020) Model cards available in Huggingface Transformers!***
 
-Please check out our model cards on huggingface transformer. With several lines of code it should be pretty straighforward to play with the DialoGPT interactively. 
+Please check out our model cards in huggingface Transformers repository. With several lines of code it should be pretty straighforward to play with the DialoGPT interactively. 
 
 [small model: https://huggingface.co/microsoft/DialoGPT-small](https://huggingface.co/microsoft/DialoGPT-small)
 
