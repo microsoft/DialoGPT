@@ -62,7 +62,7 @@ We created a demo script `demo.py` to ease the difficulty of the deployment of t
 
 #### Train model with Conda Environment
 
-Please use the below commandlines to clone, install the requirements and load the Conda environment (Note that Cuda 10 is required):
+Please use the below commandlines to clone, install the requirements and load the Conda environment (Note that the Nvidia CUDA 10.0 developer toolkit is required):
 
 
 ```bash
