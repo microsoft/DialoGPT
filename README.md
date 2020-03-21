@@ -39,8 +39,15 @@ Please check out our model cards in huggingface Transformers repository. With se
 
 
 <!--**This github repository will be updated soon. Please stay tuned.**-->
-## Minimal Computational Configurations
-This code can be run on CPU, but it would be slow. We would recommend to use GPU to train and finetune all models. There is no minimal limit of the number of GPUs. However, if using distributed train for multiple GPUs configuration, the speed-up vs the number of GPUs is roughly sub-linear. To simulate the same batchsize when using less GPUs, please use a larger `gradient_accumulation_steps` in model training. 
+<!--## Minimal Computational Configurations-->
+## Recommended Configuration
+
+- Linux Ubuntu 16.04
+- GPU with at least 12G memory
+
+DialoGPT was developed entirely on **Ubuntu 16.04**, and -- depending on our availability -- we try to provide support if you experience difficulties running the code on the same configuration. However, we are **unable to provide support for other distributions or operating systems**. Portions of the code may run on other UNIX flavors (macOS, Windows subsystem for Linux, Cygwin, etc.), but it is recommended to use Ubuntu for the main training code.
+
+The training code can be run on CPU, but it can be slow. We would recommend to use GPU to train and finetune all models. There is no minimal limit of the number of GPUs. However, if using distributed train for multiple GPUs configuration, the speed-up vs the number of GPUs is roughly sub-linear. To simulate the same batchsize when using less GPUs, please use a larger `gradient_accumulation_steps` in model training. 
 
 The 117M and 345M model can be loaded in a single GPU with 12G memory. The 762M model would require a single GPU that has greater than 16G memory for efficient training. The training speed on a benchmark data with 50M training instances and V100 GPUs:
 
