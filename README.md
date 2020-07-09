@@ -73,7 +73,7 @@ Please use the below commandlines to clone, install the requirements and load th
 
 
 ```bash
-sudo apt-get install -y make wget gzip bzip2 xz-utils zstd
+sudo apt-get install -y make wget gzip bzip2 xz-utils zstd sed
 ```
 
 ```bash

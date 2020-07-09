@@ -5,15 +5,21 @@
 
 include configs/Makefile.local
 
+ifeq ($(SIZE), full)
+all: train refs
+else
 all: train 
-#all: train refs
+endif
 refs: ../data/test.refs.txt
 train: ../data/train.tsv
 test: $T/test.tsv.gz
 
 #### Merged files:
 
-../data/test.refs.txt: $T/test.tsv.gz
+../data/test.refs.txt: ../data/test.scored_refs.txt
+	sed 's/[0-9]\+|//g' < $+ > $@
+
+../data/test.scored_refs.txt: $T/test.tsv.gz
 	python src/create-multiref.py --data $< --testids data/test-multi-refs-ids.txt --out $@
 
 ../data/%.tsv: $T/%.tsv.gz
