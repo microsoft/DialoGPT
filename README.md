@@ -16,6 +16,13 @@ ArXiv paper: [https://arxiv.org/abs/1911.00536](https://arxiv.org/abs/1911.00536
 
 
 ## News ##
+
+***(Update 07/08/2020) The 6K multi-ref test set has been released!***
+
+To generate the data, pleaser run `demo.py` and set the data option to 'full', the generated 6k multi-ref test set will be located at
+
+`./data/test.refs.txt`
+
 ***(Update 03/10/2020) Model cards available in Huggingface Transformers!***
 
 Please check out our model cards in huggingface Transformers repository. With several lines of code it should be pretty straighforward to play with the DialoGPT interactively. 
@@ -141,6 +148,10 @@ python demo.py --data full
 ```
 
 The small Reddit data is around 140MB and the full Reddit data is more than 27GB. You can prepare a cup of coffee when processing with the full Reddit data because **it takes a long time**!
+
+To generate the 6k multi-ref test set data, pleaser run `demo.py` and set the data option to 'full', the generation will be located at
+
+`./data/test.refs.txt`
 
 #### Pretrained model
 
@@ -307,7 +318,7 @@ The evaluation results will be generated in the folder `./dstc/eval/`
 
 ### Automatic evaluation
 
-We test on 6K multi-ref dataset from Reddit (this test data will be release soon). The results are summarized in below
+We test on 6K multi-ref dataset from Reddit. The results are summarized in below
 
 | Experiment         | NIST2 | NIST4 | BLEU2  | BLEU4 | METEOR | ENT-4 | DIST-1 | DIST-2 | Avg. Len |
 |--------------------|-------|-------|--------|-------|--------|----------|------------|------------|---------|
