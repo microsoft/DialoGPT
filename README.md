@@ -17,6 +17,15 @@ ArXiv paper: [https://arxiv.org/abs/1911.00536](https://arxiv.org/abs/1911.00536
 
 ## News ##
 
+***(Update 07/28/2020) The 6K multi-ref test set has been released!***
+
+A 3rd-party Rick Sanchez bot (and a great tutorial of how to finetune DialoGPT to build a customized bot!) built by [Rostyslav Neskorozhenyi
+](https://www.linkedin.com/in/slanj/) based on DialoGPT. You can find more information at:
+ 
+Medium post: https://towardsdatascience.com/make-your-own-rick-sanchez-bot-with-transformers-and-dialogpt-fine-tuning-f85e6d1f4e30
+ 
+Colab link: https://colab.research.google.com/drive/15wa925dj7jvdvrz8_z3vU7btqAFQLVlG
+
 ***(Update 07/08/2020) The 6K multi-ref test set has been released!***
 
 To generate the data, pleaser run `demo.py` and set the data option to 'full', the generated 6k multi-ref test set will be located at
