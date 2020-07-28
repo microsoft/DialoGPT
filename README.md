@@ -17,7 +17,7 @@ ArXiv paper: [https://arxiv.org/abs/1911.00536](https://arxiv.org/abs/1911.00536
 
 ## News ##
 
-***(Update 07/28/2020) The 6K multi-ref test set has been released!***
+***(Update 07/28/2020) How to customize your bot***
 
 A 3rd-party Rick Sanchez bot (and a great tutorial of how to finetune DialoGPT to build a customized bot!) built by [Rostyslav Neskorozhenyi
 ](https://www.linkedin.com/in/slanj/) based on DialoGPT. You can find more information at:
