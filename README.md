@@ -17,15 +17,6 @@ ArXiv paper: [https://arxiv.org/abs/1911.00536](https://arxiv.org/abs/1911.00536
 
 ## News ##
 
-***(Update 07/28/2020) How to customize your bot***
-
-A 3rd-party Rick Sanchez bot (and a great tutorial of how to finetune DialoGPT to build a customized bot!) built by [Rostyslav Neskorozhenyi
-](https://www.linkedin.com/in/slanj/) based on DialoGPT. You can find more information at:
- 
-Medium post: https://towardsdatascience.com/make-your-own-rick-sanchez-bot-with-transformers-and-dialogpt-fine-tuning-f85e6d1f4e30
- 
-Colab link: https://colab.research.google.com/drive/15wa925dj7jvdvrz8_z3vU7btqAFQLVlG
-
 ***(Update 07/08/2020) The 6K multi-ref test set has been released!***
 
 To generate the data, pleaser run `demo.py` and set the data option to 'full', the generated 6k multi-ref test set will be located at
@@ -52,7 +43,7 @@ Please check out our model cards in huggingface Transformers repository. With se
 - [https://github.com/andreamad8/DialoGPT2-Interact](https://github.com/andreamad8/DialoGPT2-Interact) An interactive script featuring multiturn chatbot by andreamad8,[ref](https://github.com/microsoft/DialoGPT/issues/3#issuecomment-551450016)
 - [https://github.com/LHolten/DialoGTP-MMI-decoder](https://github.com/LHolten/DialoGTP-MMI-decoder) An MMI implementation by LHolten,[ref](https://github.com/microsoft/DialoGPT/issues/3#issuecomment-558318401)
 - [https://colab.research.google.com/drive/1-_KjlAV3J1IVDw_9KogjKDCzgFY7Jp7E](https://colab.research.google.com/drive/1-_KjlAV3J1IVDw_9KogjKDCzgFY7Jp7E) A colab interactive notebook by illuminascent@Reddit,[ref](https://www.reddit.com/r/MachineLearning/comments/dt5woy/p_dialogpt_state_of_the_art_conversational_model/?st=k530k3oo&sh=f6cd20fd)
-
+- [https://colab.research.google.com/drive/15wa925dj7jvdvrz8_z3vU7btqAFQLVlG](A great tutorial of how to finetune DialoGPT to build a customized bot) built by [Rostyslav Neskorozhenyi](https://www.linkedin.com/in/slanj/). You can find more information at [here](https://towardsdatascience.com/make-your-own-rick-sanchez-bot-with-transformers-and-dialogpt-fine-tuning-f85e6d1f4e30) 
 
 <!--**This github repository will be updated soon. Please stay tuned.**-->
 <!--## Minimal Computational Configurations-->
