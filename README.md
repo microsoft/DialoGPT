@@ -17,6 +17,10 @@ ArXiv paper: [https://arxiv.org/abs/1911.00536](https://arxiv.org/abs/1911.00536
 
 ## News ##
 
+***(Update 09/15/2020) A set of large-scale [dialog ranking models](https://github.com/golsun/DialogRPT) has been released!***
+
+DialoGPT generation is improved by integrating with our latest dialog ranking models, [DialogRPT](https://github.com/golsun/DialogRPT)
+
 ***(Update 07/08/2020) The 6K multi-ref test set has been released!***
 
 To generate the data, pleaser run `demo.py` and set the data option to 'full', the generated 6k multi-ref test set will be located at
