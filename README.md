@@ -228,12 +228,14 @@ We release 6 fine-tuned models which can be further fine-tuned on low-resource  
 | DialoGPT 345M model| [\[link\]](https://convaisharables.blob.core.windows.net/lsp/multiref/medium_ft.pkl) [\[huggingface model card\]](https://huggingface.co/microsoft/DialoGPT-medium) | [\[link\]](https://convaisharables.blob.core.windows.net/lsp/multiref/medium_fs.pkl) | 
 | DialoGPT 117M model| [\[link\]](https://convaisharables.blob.core.windows.net/lsp/multiref/small_ft.pkl) [\[huggingface model card\]](https://huggingface.co/microsoft/DialoGPT-small)| [\[link\]](https://convaisharables.blob.core.windows.net/lsp/multiref/small_fs.pkl) | 
 | DialoGPT 345M model (reverse, for MMI)| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/small_reverse.pkl) | -| 
-
+| [DialogRPT](https://github.com/golsun/DialogRPT) (**new** ranking models) | [link](https://github.com/golsun/DialogRPT) | -| 
 
 
 The model files can be loaded exactly as the GPT-2 model checkpoints from Huggingface's [Transformers](https://github.com/huggingface/transformers). You can find the corresponding configuration files (`merges.txt`, `config.json`, `vocab.json`) in DialoGPT's repo in `./configs/*`.
 
 The reverse model is predicting the source from the target. This model is used  for MMI reranking. 
+
+The [DialogRPT](https://github.com/golsun/DialogRPT) models our recently proposed ranking models used to predict the human feedback (upvotes, replies) of the responses. These models can be used to improve the DialoGPT generation quality (see our [EMNLP paper](https://arxiv.org/abs/2009.06978) for details).
 
 ## Retraining full models
 
