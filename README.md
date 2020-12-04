@@ -37,7 +37,7 @@ Please check out our model cards in huggingface Transformers repository. With se
 
 [large model: https://huggingface.co/microsoft/DialoGPT-large](https://huggingface.co/microsoft/DialoGPT-large)
 
-
+[**(New)** Ranking model: https://huggingface.co/microsoft/DialogRPT-updown](https://huggingface.co/microsoft/DialogRPT-updown?text=I+love+NLP%21+%3C%7Cendoftext%7C%3E+Me+too%21)
 
 
 ***(Update 01/06/2020) Some third-party decoding script implementations:***
