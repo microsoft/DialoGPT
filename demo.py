@@ -65,18 +65,10 @@ if dargs.data == 'dummy':
     ret = sp.run(cmd.split(' '), stdout=sp.PIPE, stderr=sp.STDOUT, cwd=DATA_FOLDER)
 elif dargs.data == 'small':
     myCmd = os.popen('cd reddit_extractor; make -j 8; cd ..').read()
-    cmd = 'gzip -d ./train.tsv.gz'
-    ret = sp.run(cmd.split(' '), stdout=sp.PIPE, stderr=sp.STDOUT, cwd=DATA_FOLDER)
 elif dargs.data == 'full':
     myCmd = os.popen('cd reddit_extractor; SIZE=full make -j 8; cd ..').read()
-    cmd = 'gzip -d ./train.tsv.gz'
-    ret = sp.run(cmd.split(' '), stdout=sp.PIPE, stderr=sp.STDOUT, cwd=DATA_FOLDER)
 else:
     raise ValueError('you need to implement your own data type, or use either dummy, small, or full')
-
-if ret.returncode != 0:
-    print(f'error occurred, {ret.stdout}')
-    sys.exit(ret.returncode)
 
 logger.info('Preparing Data...')
 data_path = os.path.join(DATA_FOLDER, 'train.tsv')
