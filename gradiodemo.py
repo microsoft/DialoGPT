@@ -24,7 +24,7 @@ inputs = gr.inputs.Textbox(lines=1, label="Input Text")
 outputs =  gr.outputs.Textbox(label="DialoGPT")
 
 title = "DialoGPT"
-description = "demo for Microsoft DialoGPT with Hugging Face transformers. To use it, simply input text or click one of the examples text to load them. Read more at the links below."
+description = "demo for Microsoft DialoGPT with Hugging Face transformers. To use it, simply input text or click one of the examples text to load them. Read more at the links below. *This is not a Microsoft product and is developed for Gradio*"
 article = "<p style='text-align: center'><a href='https://arxiv.org/abs/1911.00536'>DialoGPT: Large-Scale Generative Pre-training for Conversational Response Generation</a> | <a href='https://github.com/microsoft/DialoGPT'>Github Repo</a> | <a href='https://huggingface.co/microsoft/DialoGPT-large'>Hugging Face DialoGPT-large</a></p>"
 examples = [
             ["Hi, how are you?"],
