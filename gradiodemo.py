@@ -1,6 +1,6 @@
-# A 3rd party demo contributed by Github user AK391. This is not implemented by Microsoft and Microsoft do not own any IP with this implementation and associated demo. 
+# A 3rd party demo contributed by Github user AK391 (https://github.com/AK391). This is not implemented by Microsoft and Microsoft do not own any IP with this implementation and associated demo. 
 # Microsoft has not tested the generation of this demo and is not responsible for any offensive or biased generation from this demo. 
-# Please contact the creator for any potential issue. 
+# Please contact the creator AK391 (https://github.com/AK391) for any potential issue. 
 
 
 from transformers import AutoModelForCausalLM, AutoTokenizer
