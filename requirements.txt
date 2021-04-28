@@ -1,0 +1,7 @@
+transformers
+ftfy
+regex
+tqdm
+torch
+torchvision
+pycrypto
