@@ -17,6 +17,8 @@ ArXiv paper: [https://arxiv.org/abs/1911.00536](https://arxiv.org/abs/1911.00536
 
 ## News ##
 
+***(Update 06/23/2021) We have released a retrieval-augmented/grounded version of DialoGPT (RetGen), please check out the [RetGen repo](https://github.com/dreasysnail/RetGen)  and [RetGen paper](https://arxiv.org/abs/2105.06597) ***
+
 ***(Update 05/20/2021) An awesome [video walkthrough](https://www.youtube.com/watch?v=Zo679MYoJns) on YouTube for DialoGPT by [Prakhar Mishra](http://wsl.iiitb.ac.in/prakhar-mishra/)***
 
 ***(Update 03/31/2021) A 3rd party demo by [AK391](https://github.com/AK391) using Gradio [web demo](https://gradio.app/g/AK391/DialoGPT) try it out***
@@ -559,6 +561,8 @@ top_p | `float` | `0.9` | Nucleus filtering (top-p) before sampling (`<=0.0`: no
 -->
 
 ## Related Project
+
+* RetGen: [https://github.com/dreasysnail/RetGen](https://github.com/dreasysnail/RetGen). Retrieval-augmented/grounded DialoGPT and beyond. RetGen is a joint training framework that simultaneously optimizes a dense passage retriever and a knowledge-grounded text generator in an end-to-end fashion. 
 
 * Microsoft ICECAPS: [https://github.com/microsoft/icecaps](https://github.com/microsoft/icecaps). 
 
