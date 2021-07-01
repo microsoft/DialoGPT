@@ -232,10 +232,10 @@ We release 6 fine-tuned models which can be further fine-tuned on low-resource  
 
 | Model           |  Fine-tuned from GPT-2| Trained from scratch
 |----------------------|--------|--------|
-| DialoGPT 762M model| [\[link\]](https://convaisharables.blob.core.windows.net/lsp/multiref/large_ft.pkl) [\[huggingface model card\]](https://huggingface.co/microsoft/DialoGPT-large)  | [\[link\]](https://convaisharables.blob.core.windows.net/lsp/multiref/large_fs.pkl) |
-| DialoGPT 345M model| [\[link\]](https://convaisharables.blob.core.windows.net/lsp/multiref/medium_ft.pkl) [\[huggingface model card\]](https://huggingface.co/microsoft/DialoGPT-medium) | [\[link\]](https://convaisharables.blob.core.windows.net/lsp/multiref/medium_fs.pkl) | 
-| DialoGPT 117M model| [\[link\]](https://convaisharables.blob.core.windows.net/lsp/multiref/small_ft.pkl) [\[huggingface model card\]](https://huggingface.co/microsoft/DialoGPT-small)| [\[link\]](https://convaisharables.blob.core.windows.net/lsp/multiref/small_fs.pkl) | 
-| DialoGPT 345M model (reverse, for MMI)| [link](https://convaisharables.blob.core.windows.net/lsp/multiref/small_reverse.pkl) | -| 
+| DialoGPT 762M model| [\[link\]](https://acvrpublicycchen.blob.core.windows.net/dialogpt/multiref/large_ft.pkl) [\[huggingface model card\]](https://huggingface.co/microsoft/DialoGPT-large)  | [\[link\]](https://acvrpublicycchen.blob.core.windows.net/dialogpt/multiref/large_fs.pkl) |
+| DialoGPT 345M model| [\[link\]](https://acvrpublicycchen.blob.core.windows.net/dialogpt/multiref/medium_ft.pkl) [\[huggingface model card\]](https://huggingface.co/microsoft/DialoGPT-medium) | [\[link\]](https://acvrpublicycchen.blob.core.windows.net/dialogpt/multiref/medium_fs.pkl) | 
+| DialoGPT 117M model| [\[link\]](https://acvrpublicycchen.blob.core.windows.net/dialogpt/multiref/small_ft.pkl) [\[huggingface model card\]](https://huggingface.co/microsoft/DialoGPT-small)| [\[link\]](https://acvrpublicycchen.blob.core.windows.net/dialogpt/multiref/small_fs.pkl) | 
+| DialoGPT 345M model (reverse, for MMI)| [link](https://acvrpublicycchen.blob.core.windows.net/dialogpt/multiref/small_reverse.pkl) | -| 
 | [DialogRPT](https://github.com/golsun/DialogRPT) (**new** ranking models) | [link](https://github.com/golsun/DialogRPT) | -| 
 
 
@@ -301,7 +301,7 @@ To fine-tune the `345M` DialoGPT model on the DSTC-7 challenge data on a server 
 python3 -m torch.distributed.launch --nproc_per_node=8 train_LSP.py --init_checkpoint ./models/medium/medium_ft.pkl --train_input_file ./data/DSTC_train.db --eval_input_file ./data/DSTC_valid.tsv --model_name_or_path ./model/medium/ --learning_rate 1e-4  --train_batch_size 64 --eval_batch_size 64 --no_token_id
 ```
 
-The trained model can be found at [DSTC medium model](https://convaisharables.blob.core.windows.net/lsp/DSTC/medium_ft.pkl)
+The trained model can be found at [DSTC medium model](https://acvrpublicycchen.blob.core.windows.net/dialogpt/DSTC/medium_ft.pkl)
 
 
 #### Evaluation

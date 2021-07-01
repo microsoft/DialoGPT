@@ -13,14 +13,14 @@ logger = logging.getLogger(__name__)
 # Note that the model size is roughly half of the GPT model because our model is saved by fp16
 LSP_MODEL_URL = {
     'multiref': {
-        'large_fs': 'https://convaisharables.blob.core.windows.net/lsp/multiref/large_fs.pkl',
-        'medium_fs': 'https://convaisharables.blob.core.windows.net/lsp/multiref/medium_fs.pkl',
-        'medium_ft': 'https://convaisharables.blob.core.windows.net/lsp/multiref/medium_ft.pkl',
-        'small_fs': 'https://convaisharables.blob.core.windows.net/lsp/multiref/small_fs.pkl',
-        'small_ft': 'https://convaisharables.blob.core.windows.net/lsp/multiref/small_ft.pkl'
+        'large_fs': 'https://acvrpublicycchen.blob.core.windows.net/dialogpt/multiref/large_fs.pkl',
+        'medium_fs': 'https://acvrpublicycchen.blob.core.windows.net/dialogpt/multiref/medium_fs.pkl',
+        'medium_ft': 'https://acvrpublicycchen.blob.core.windows.net/dialogpt/multiref/medium_ft.pkl',
+        'small_fs': 'https://acvrpublicycchen.blob.core.windows.net/dialogpt/multiref/small_fs.pkl',
+        'small_ft': 'https://acvrpublicycchen.blob.core.windows.net/dialogpt/multiref/small_ft.pkl'
     },
     'dstc': {
-        'medium_ft': 'https://convaisharables.blob.core.windows.net/lsp/DSTC/medium_ft.pkl'
+        'medium_ft': 'https://acvrpublicycchen.blob.core.windows.net/dialogpt/DSTC/medium_ft.pkl'
     }
 }
 
@@ -32,21 +32,21 @@ GPT2_PRETRAINED_MODEL_ARCHIVE_MAP = {
 }
 
 CONFIG_FILE = {
-    'small': 'https://convaisharables.blob.core.windows.net/lsp/117M/config.json',
-    'medium': 'https://convaisharables.blob.core.windows.net/lsp/345M/config.json',
-    'large': 'https://convaisharables.blob.core.windows.net/lsp/1542M/config.json'
+    'small': 'https://acvrpublicycchen.blob.core.windows.net/dialogpt/117M/config.json',
+    'medium': 'https://acvrpublicycchen.blob.core.windows.net/dialogpt/345M/config.json',
+    'large': 'https://acvrpublicycchen.blob.core.windows.net/dialogpt/1542M/config.json'
 }
 
 VOCAB_FILE = {
-    'small': 'https://convaisharables.blob.core.windows.net/lsp/117M/vocab.json',
-    'medium': 'https://convaisharables.blob.core.windows.net/lsp/345M/vocab.json',
-    'large': 'https://convaisharables.blob.core.windows.net/lsp/1542M/vocab.json'
+    'small': 'https://acvrpublicycchen.blob.core.windows.net/dialogpt/117M/vocab.json',
+    'medium': 'https://acvrpublicycchen.blob.core.windows.net/dialogpt/345M/vocab.json',
+    'large': 'https://acvrpublicycchen.blob.core.windows.net/dialogpt/1542M/vocab.json'
 }
 
 MERGE_FILE = {
-    'small': 'https://convaisharables.blob.core.windows.net/lsp/117M/merges.txt',
-    'medium': 'https://convaisharables.blob.core.windows.net/lsp/345M/merges.txt',
-    'large': 'https://convaisharables.blob.core.windows.net/lsp/1542M/merges.txt'
+    'small': 'https://acvrpublicycchen.blob.core.windows.net/dialogpt/117M/merges.txt',
+    'medium': 'https://acvrpublicycchen.blob.core.windows.net/dialogpt/345M/merges.txt',
+    'large': 'https://acvrpublicycchen.blob.core.windows.net/dialogpt/1542M/merges.txt'
 }
 
 
