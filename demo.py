@@ -64,7 +64,7 @@ if dargs.data == 'dummy':
     cmd = 'bash prepare4db.sh'
     ret = sp.run(cmd.split(' '), stdout=sp.PIPE, stderr=sp.STDOUT, cwd=DATA_FOLDER)
 elif dargs.data == 'small':
-    myCmd = os.popen('cd reddit_extractor; make -j 8; cd ..').read()
+    myCmd = os.popen('cd reddit_extractor; SIZE=small make -j 8; cd ..').read()
 elif dargs.data == 'full':
     myCmd = os.popen('cd reddit_extractor; SIZE=full make -j 8; cd ..').read()
 else:

@@ -33,23 +33,23 @@ $T/test.tsv.gz: $(TARGETS_TEST)
 
 #### Create extracts by month:
 
-$T/test/$A/%.tsv.gz: $T/test/$P/%/stat.tsv
+$T/test/$A/%.tsv.gz: $T/test/$P/%/stat.tsv prep
 	mkdir -p $T/test/$A
 	python src/reddit.py $(*F) --task=conv --keep_keys=data/keys-test.gz --parallel=True --reddit_input $S --reddit_output $T/test --clean True --min_score $(MIN_SCORE) --min_depth $(MIN_DEPTH) --max_depth $(MAX_DEPTH) --use_title $(TITLE) --leaves_only 0 > $@.log 2>&1
 	gzip -f $T/test/$A/$(*F).tsv
 
-$T/train/$A/%.tsv.gz: $T/train/$P/%/stat.tsv
+$T/train/$A/%.tsv.gz: $T/train/$P/%/stat.tsv prep
 	mkdir -p $T/train/$A
 	python src/reddit.py $(*F) --task=conv $(HASH_FLAG) --keep_keys=$K/$(*F).gz --discard_tgt_keys $K/$(*F)-o.gz --parallel=True $(WORDS_BLOCKLIST) $(SUBREDDITS_BLOCKLIST) --reddit_input $S --reddit_output $T/train --clean True --min_score $(MIN_SCORE) --min_depth $(MIN_DEPTH) --max_depth $(MAX_DEPTH) --use_title $(TITLE) --leaves_only $(LEAVES_ONLY) > $@.log 2>&1
 	gzip -f $T/train/$A/$(*F).tsv
 
-$T/test/$P/%/stat.tsv: $S/RS_%.bz2 $S/RC_%.bz2
+$T/test/$P/%/stat.tsv: $S/RS_%.zst $S/RC_%.zst prep
 	mkdir -p $T/test/$P/$(*F)
 	python src/reddit.py $(*F) --keep_keys=data/keys-test.gz --task=extract --reddit_input $S --reddit_output $T/test > $@.log 2>&1
 	gzip -f $T/test/$P/$(*F)/rc*.tsv
 	gzip -f $T/test/$P/$(*F)/rs*.tsv
 
-$T/train/$P/%/stat.tsv: $S/RS_%.bz2 $S/RC_%.bz2
+$T/train/$P/%/stat.tsv: $S/RS_%.zst $S/RC_%.zst prep
 	mkdir -p $T/train/$P/$(*F)
 	python src/reddit.py $(*F) --keep_keys=$K/$(*F).gz --task=extract --reddit_input $S --reddit_output $T/train > $@.log 2>&1
 	gzip -f $T/train/$P/$(*F)/rc*.tsv
@@ -57,32 +57,21 @@ $T/train/$P/%/stat.tsv: $S/RS_%.bz2 $S/RC_%.bz2
 
 #### Download Reddit dumps:
 
-$S/RS_%.bz2: lists/files/RS_v2_%.xz
-	wget $U/submissions/RS_v2_$(*F).xz -O $S/RS_v2_$(*F).xz -o logs/RS_v2_$(*F).xz.log -c
-	xzcat $S/RS_v2_$(*F).xz | bzip2 > $@
-
-$S/RS_%.bz2: lists/files/RS_%.xz
-	wget $U/submissions/RS_$(*F).xz -O $S/RS_$(*F).xz -o logs/RS_$(*F).xz.log -c
-	xzcat $S/RS_$(*F).xz | bzip2 > $@
-$S/RC_%.bz2: lists/files/RC_%.xz
-	wget $U/comments/RC_$(*F).xz -O $S/RC_$(*F).xz -o logs/RC_$(*F).xz.log -c
-	xzcat $S/RC_$(*F).xz | bzip2 > $@
-
-$S/RS_%.bz2: lists/files/RS_%.zst
-	wget $U/submissions/RS_$(*F).zst -O $S/RS_$(*F).zst -o logs/RS_$(*F).zst.log -c
-	zstdcat $S/RS_$(*F).zst | bzip2 > $@
-$S/RC_%.bz2: lists/files/RC_%.zst 
-	wget $U/comments/RC_$(*F).zst -O $S/RC_$(*F).zst -o logs/RC_$(*F).zst.log -c
-	zstdcat $S/RC_$(*F).zst | bzip2 > $@
+$S/RS_%.zst: lists/files/RS_%.zst
+	wget $(WARGS) $U/submissions/RS_$(*F).zst -O $S/RS_$(*F).zst -o logs/RS_$(*F).zst.log -c
+$S/RC_%.zst: lists/files/RC_%.zst
+	wget $(WARGS) $U/comments/RC_$(*F).zst -O $S/RC_$(*F).zst -o logs/RC_$(*F).zst.log -c
 
 $S/RS_%.bz2: lists/files/RS_%.bz2
-	wget $U/submissions/RS_$(*F).bz2 -O $S/RS_$(*F).bz2 -o logs/RS_$(*F).bz2.log -c
+	wget $(WARGS) $U/submissions/RS_$(*F).bz2 -O $S/RS_$(*F).bz2 -o logs/RS_$(*F).bz2.log -c
 	touch $@
 $S/RC_%.bz2: lists/files/RC_%.bz2
-	wget $U/comments/RC_$(*F).bz2 -O $S/RC_$(*F).bz2 -o logs/RC_$(*F).bz2.log -c
+	wget $(WARGS) $U/comments/RC_$(*F).bz2 -O $S/RC_$(*F).bz2 -o logs/RC_$(*F).bz2.log -c
 	touch $@
 
 #### Extraction preparation:
+
+prep: $(LIST_REDDIT) lists/files/.create
 
 $(LIST_REDDIT): lists/files/.create
 	touch $@
@@ -97,4 +86,5 @@ $K/.create: data/keys-$(SIZE).tar
 	tar xvf $<
 
 data/keys-full.tar:
-	wget https://acvrpublicycchen.blob.core.windows.net/dialogpt/keys-full.tar -O data/keys-full.tar
+	mkdir -p logs
+	wget $(WARGS) https://acvrpublicycchen.blob.core.windows.net/dialogpt/keys-full.tar -O data/keys-full.tar

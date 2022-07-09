@@ -17,6 +17,8 @@ ArXiv paper: [https://arxiv.org/abs/1911.00536](https://arxiv.org/abs/1911.00536
 
 ## News ##
 
+***(Update 07/09/2022) Changes on the files.pushshift.io/reddit server caused our data generation pipeline to break. These problems have now been fixed, and the steps explained in the Data Preparation subsection below should work again. Data is generated in about 10 hours with 8 processes (`-j 8`), and 800GB of temporary disk space is needed.***
+
 ***(Update 06/23/2021) We have released a retrieval-augmented/grounded version of DialoGPT (RetGen), please check out the [RetGen repo](https://github.com/dreasysnail/RetGen)  and [RetGen paper](https://arxiv.org/abs/2105.06597)***
 
 ***(Update 05/20/2021) An awesome [video walkthrough](https://www.youtube.com/watch?v=Zo679MYoJns) on YouTube for DialoGPT by [Prakhar Mishra](http://wsl.iiitb.ac.in/prakhar-mishra/)***
@@ -247,7 +249,7 @@ The [DialogRPT](https://github.com/golsun/DialogRPT) models our recently propose
 
 ## Retraining full models
 
-### Preparation
+### Data Preparation
 
 The first step to retrain the full models is to generate the aforementioned 27GB Reddit dataset. This involves downloading full Reddit submission and comments dumps from [https://files.pushshift.io/reddit](https://files.pushshift.io/reddit) and creating intermediate files, which overall require **700GB of local disk space**. Downloading and processing the full data requires about 1-2 days, depending on your (CPU) compute capabilties (e.g., ~24 hours with 8 cores on a recent computer). Assuming you ran the above setup and installation steps (conda activate LSP, etc.), you can create the full dataset by running either:
 
@@ -261,7 +263,7 @@ cd reddit_extractor; SIZE=full make -j 8; cd ..
 
 The former command calls the latter, so the two methods are equivalent. We recommend the former, as the latter is mostly useful if you run into any problem or want to customize any arguments (e.g., the `make` command lets you build only a subset of the data). Note that the downloading phase can be error prone, for example based on your geolocation (firewall, etc.). If the above commands fail to generate `data/train.tsv`, or if that file is not anywhere close to 27GB, it means something went wrong. In that case, you may want to inspect `reddit_extractor/wget-log` and `reddit_extractor/logs/*.log` for any obvious error (e.g., wget unable to download from pushshift.io). If error messages don't make sense to you, feel free to contact us. If so, please be sure to include any error messages gathered from these log files.
 
-Training data statistics: the generated training tsv file should be roughly 26.8 GB uncompressed, with 146.8M training instances, 3.87B source tokens, and 2.14B target tokens (including utterance-level 0/1 weights).
+Training data statistics: the generated training tsv file should be roughly 26.8 GB uncompressed, with 146.8M training instances, 3.87B source tokens, and 2.14B target tokens (including utterance-level 0/1 weights). The resulting train.tsv file should contain 146,846,215 lines.
 
 
 ### Training

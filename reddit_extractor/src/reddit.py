@@ -4,6 +4,7 @@
 #  Licensed under the MIT license. 
 
 import sys
+import io
 import time
 import os.path
 import math
@@ -11,7 +12,7 @@ import re
 import argparse
 import traceback
 import json
-import bz2
+import zstandard as zstd
 import gzip
 from nltk.tokenize import TweetTokenizer
 from flashtext import KeywordProcessor
@@ -26,6 +27,7 @@ TAG_COMMENT = 't1_'
 TAG_SUBMISSION = 't3_'
 dontuse = '__dontuse__'
 url_str = '__url__'
+max_window_size = 2**31
 
 parser = argparse.ArgumentParser()
 
@@ -37,8 +39,8 @@ parser.add_argument("--discard_tgt_keys", help="hashes of targets to discard")
 parser.add_argument("--freq_words", help="words sorted by their corpus frequencies")
 parser.add_argument("--bl_subreddits", help="blocklist of offensive subreddits")
 parser.add_argument("--wl_subreddits", help="whitelist of relatively safe subreddits")
-parser.add_argument("--reddit_input", default="d:/data/reddit/bz2/", help="Location of the input reddit data (bz2 files)")
-parser.add_argument("--reddit_output", default="d:/data/reddit/", help="Location of the output reddit data (conversations)")
+parser.add_argument("--reddit_input", default="reddit_in", help="Location of the input reddit data (bz2 files)")
+parser.add_argument("--reddit_output", default="reddit_out", help="Location of the output reddit data (conversations)")
 parser.add_argument("--max_len", default=30, type=int)
 # 30 words means roughly 70 characters on average for Reddit
 parser.add_argument("--max_len_type", default='w') # w for words, c for chars
@@ -118,41 +120,43 @@ def gpt_norm_sentence(txt):
 	return ' '.join(txt.split())
 
 
-def extract_submissions(fld_bz2, fld_split, size=2e5):
-	path_in = fld_bz2 + '/RS_%s.bz2'%args.dump_name
+def extract_submissions(fld_root, fld_split, size=2e5):
+	path_in = fld_root + '/RS_%s.zst'%args.dump_name
 	n = 0
 	m = 0
 	sub = 0
 	sid = []
 	sids = []
 	lines = []
-	with bz2.open(path_in, 'rt', encoding="utf-8") as f:
-		for line in f:
-			n += 1
-			if n%1e4 == 0:
-				print('[%s] selected %.3fM from %.2fM submissions'%(
-					args.dump_name, m/1e6, n/1e6))
-			try:
-				submission = json.loads(line)
-				if int(submission['num_comments']) < 2: # filter 1
+	with open(path_in, 'rb') as fh:
+		dctx = zstd.ZstdDecompressor(max_window_size=max_window_size)
+		with dctx.stream_reader(fh) as reader:
+			for line in io.TextIOWrapper(io.BufferedReader(reader), encoding='utf-8'):
+				n += 1
+				if n%1e4 == 0:
+					print('[%s] selected %.3fM from %.2fM submissions'%(
+						args.dump_name, m/1e6, n/1e6))
+				try:
+					submission = json.loads(line)
+					if int(submission['num_comments']) < 2: # filter 1
+						continue
+					submission['title'] = norm_sentence(submission['title'], True)
+					lines.append('\t'.join([str(submission[k]) for k in fields_subm]))
+					m += 1
+					sid.append(get_submission_id(submission))
+
+				except Exception:
+					traceback.print_exc()
 					continue
-				submission['title'] = norm_sentence(submission['title'], True)
-				lines.append('\t'.join([str(submission[k]) for k in fields_subm]))
-				m += 1
-				sid.append(get_submission_id(submission))
 
-			except Exception:
-				traceback.print_exc()
-				continue
-
-			if len(sid) == size:
-				print('writing submissions_sub%i'%sub)
-				sids.append(set(sid))
-				with open(fld_split + '/rs_sub%i.tsv'%sub, 'w', encoding='utf-8') as f:
-					f.write('\n'.join(lines))
-				sid = []
-				lines = []
-				sub += 1
+				if len(sid) == size:
+					print('writing submissions_sub%i'%sub)
+					sids.append(set(sid))
+					with open(fld_split + '/rs_sub%i.tsv'%sub, 'w', encoding='utf-8') as f:
+						f.write('\n'.join(lines))
+					sid = []
+					lines = []
+					sub += 1
 
 	print('writing submissions_sub%i'%sub)
 	sids.append(set(sid))
@@ -162,8 +166,8 @@ def extract_submissions(fld_bz2, fld_split, size=2e5):
 	return sids, m, n
 
 
-def extract_comments(fld_bz2, fld_split, sids):
-	path_in = fld_bz2 + '/RC_%s.bz2'%args.dump_name
+def extract_comments(fld_root, fld_split, sids):
+	path_in = fld_root + '/RC_%s.zst'%args.dump_name
 	n = 0
 	m = 0
 	n_sub = len(sids)
@@ -171,42 +175,44 @@ def extract_comments(fld_bz2, fld_split, sids):
 	for sub in range(n_sub):
 		open(fld_split + '/rc_sub%i.tsv'%sub, 'w')
 
-	with bz2.open(path_in, 'rt', encoding="utf-8") as f:
-		for line in f:
-			n += 1
-			if n%1e4 == 0:
-				print('[%s] selected %.3fM from %.2fM comments'%(
-					args.dump_name, m/1e6, n/1e6))
+	with open(path_in, 'rb') as fh:
+		dctx = zstd.ZstdDecompressor(max_window_size=max_window_size)
+		with dctx.stream_reader(fh) as reader:
+			for line in io.TextIOWrapper(io.BufferedReader(reader), encoding='utf-8'):
+				n += 1
+				if n%1e4 == 0:
+					print('[%s] selected %.3fM from %.2fM comments'%(
+						args.dump_name, m/1e6, n/1e6))
 
-				for sub in range(n_sub):
-					print('    sub %i: %i'%(sub, len(lines[sub])))
-					if len(lines[sub]) > 0:
-						with open(fld_split + '/rc_sub%i.tsv'%sub, 'a', encoding='utf-8') as f:
-							f.write('\n'.join(lines[sub]) + '\n')
-						lines[sub] = []
-			try:
-				comment = json.loads(line)
-				if args.keep_keys:
-					k = '\t'.join([comment['link_id'], get_comment_id(comment), 'dep'])
-					if k not in keys.keys():
+					for sub in range(n_sub):
+						print('    sub %i: %i'%(sub, len(lines[sub])))
+						if len(lines[sub]) > 0:
+							with open(fld_split + '/rc_sub%i.tsv'%sub, 'a', encoding='utf-8') as f:
+								f.write('\n'.join(lines[sub]) + '\n')
+							lines[sub] = []
+				try:
+					comment = json.loads(line)
+					if args.keep_keys:
+						k = '\t'.join([comment['link_id'], get_comment_id(comment), 'dep'])
+						if k not in keys.keys():
+							continue
+					if comment['body'] == '[deleted]': # filter 1
 						continue
-				if comment['body'] == '[deleted]': # filter 1
-					continue
-				if '>' in comment['body'] or '&gt;' in comment['body']: # filter 3: '&gt;' means '>'
-					continue
-				sid = comment['link_id']
-				for sub in range(n_sub):
-					if sid in sids[sub]:
-						comment['n_char'] = len(comment['body'])
-						comment['body'] = norm_sentence(comment['body'], True)
-						if len(comment['body'].split()) < 2: # filter 2
+					if '>' in comment['body'] or '&gt;' in comment['body']: # filter 3: '&gt;' means '>'
+						continue
+					sid = comment['link_id']
+					for sub in range(n_sub):
+						if sid in sids[sub]:
+							comment['n_char'] = len(comment['body'])
+							comment['body'] = norm_sentence(comment['body'], True)
+							if len(comment['body'].split()) < 2: # filter 2
+								break
+							lines[sub].append('\t'.join([str(comment[k]) for k in fields_comm]))
+							m += 1
 							break
-						lines[sub].append('\t'.join([str(comment[k]) for k in fields_comm]))
-						m += 1
-						break
 
-			except Exception:
-				traceback.print_exc()
+				except Exception:
+					traceback.print_exc()
 
 	print('the rest...')
 	for sub in range(n_sub):

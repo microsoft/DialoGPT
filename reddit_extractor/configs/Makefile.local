@@ -57,6 +57,7 @@ SUBREDDITS_BLOCKLIST=--bl_subreddits lists/subreddits.blocklist.txt
 P=extract
 A=conv
 U=https://files.pushshift.io/reddit
+WARGS=--tries=0 --retry-connrefused --waitretry=30
 
 ifndef SIZE
 SIZE=small
