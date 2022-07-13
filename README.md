@@ -38,7 +38,7 @@ To generate the data, pleaser run `demo.py` and set the data option to 'full', t
 
 ***(Update 03/10/2020) Model cards available in Huggingface Transformers!***
 
-Please check out our model cards in huggingface Transformers repository. With several lines of code it should be pretty straighforward to play with the DialoGPT interactively. 
+Please check out our model cards in huggingface Transformers repository. With several lines of code it should be pretty straightforward to play with the DialoGPT interactively. 
 
 [small model: https://huggingface.co/microsoft/DialoGPT-small](https://huggingface.co/microsoft/DialoGPT-small)
 
@@ -104,7 +104,7 @@ conda env create -f LSP-linux.yml -n LSP
 conda activate LSP
 ```
 
-If you run this on an architecture other than Linux, please use `LSP-generic.yml` instead of `LSP-linux.yml` but please note that the generic one is not tested in all platform, so the stablity can not be gauranteed.
+If you run this on an architecture other than Linux, please use `LSP-generic.yml` instead of `LSP-linux.yml` but please note that the generic one is not tested in all platform, so the stability can not be guaranteed.
 To use fp16 training, please install apex by using commands below
   
 ```bash
@@ -174,7 +174,7 @@ Please run/see `demo.py` for more details about how to download/use those models
 
 #### Preparing data
 First, use the `prepare4db.sh` to convert a tsv data file into the correct format that the following script can recognize.
-The trainig data need to be then processed into a database file with below commandline:
+The training data need to be then processed into a database file with below commandline:
 
 ```bash
 python prepro.py --corpus $DATA_PATH
@@ -251,7 +251,7 @@ The [DialogRPT](https://github.com/golsun/DialogRPT) models our recently propose
 
 ### Data Preparation
 
-The first step to retrain the full models is to generate the aforementioned 27GB Reddit dataset. This involves downloading full Reddit submission and comments dumps from [https://files.pushshift.io/reddit](https://files.pushshift.io/reddit) and creating intermediate files, which overall require **700GB of local disk space**. Downloading and processing the full data requires about 1-2 days, depending on your (CPU) compute capabilties (e.g., ~24 hours with 8 cores on a recent computer). Assuming you ran the above setup and installation steps (conda activate LSP, etc.), you can create the full dataset by running either:
+The first step to retrain the full models is to generate the aforementioned 27GB Reddit dataset. This involves downloading full Reddit submission and comments dumps from [https://files.pushshift.io/reddit](https://files.pushshift.io/reddit) and creating intermediate files, which overall require **700GB of local disk space**. Downloading and processing the full data requires about 1-2 days, depending on your (CPU) compute capabilities (e.g., ~24 hours with 8 cores on a recent computer). Assuming you ran the above setup and installation steps (conda activate LSP, etc.), you can create the full dataset by running either:
 
 ```
 python demo.py --data full
@@ -268,7 +268,7 @@ Training data statistics: the generated training tsv file should be roughly 26.8
 
 ### Training
 
-We recommand generating the above data using the `demo.py --data full`, as it (1) generates the data, (2) converts it into DB format, and (3) trains a model using `python LSP_train.py`. Please directly edit `demo.py` if you want to customize any of the hyperparameters.
+We recommend generating the above data using the `demo.py --data full`, as it (1) generates the data, (2) converts it into DB format, and (3) trains a model using `python LSP_train.py`. Please directly edit `demo.py` if you want to customize any of the hyperparameters.
 
 
 ## Evaluations
@@ -477,12 +477,12 @@ System Wins      (%)         Ties        (%)         Losses   (%)
 |---------|--------|
 |What do you think of the DialoGPT repo ? | It's pretty good , but it's very easy to find a bug . |
 
-Please start a issue if you spot any :)
+Please start an issue if you spot any :)
 
 
 
 ## Try our system
-The live demo and decoding script access is upon invitation only now. Please stayed tuned for the full release. 
+The live demo and decoding script access is upon invitation only now. Please stay tuned for the full release. 
 
 
 <!--The live demo and decoding script access is upon approval request. Please apply [here](https://docs.google.com/spreadsheets/d/1epTNfaqva1isVO_o9pbyhVLsnzDn58dGkcLB0OUVcqs/edit?usp=sharing)-->
