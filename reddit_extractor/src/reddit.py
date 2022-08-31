@@ -38,11 +38,9 @@ parser.add_argument("--keep_keys", help="hashes of instances to keep")
 parser.add_argument("--discard_tgt_keys", help="hashes of targets to discard")
 parser.add_argument("--freq_words", help="words sorted by their corpus frequencies")
 parser.add_argument("--bl_subreddits", help="blocklist of offensive subreddits")
-parser.add_argument("--wl_subreddits", help="whitelist of relatively safe subreddits")
 parser.add_argument("--reddit_input", default="reddit_in", help="Location of the input reddit data (bz2 files)")
 parser.add_argument("--reddit_output", default="reddit_out", help="Location of the output reddit data (conversations)")
 parser.add_argument("--max_len", default=30, type=int)
-# 30 words means roughly 70 characters on average for Reddit
 parser.add_argument("--max_len_type", default='w') # w for words, c for chars
 parser.add_argument("--min_depth", default=2, type=int)
 parser.add_argument("--max_depth", default=10, type=int)
@@ -63,7 +61,6 @@ fields_comm = [ "id", "author", "parent_id", "link_id", "score", "n_char", "body
 
 bl_words = KeywordProcessor()
 bl_subreddits = {}
-wl_subreddits = {}
 keys = {}
 keys_rm = {}
 

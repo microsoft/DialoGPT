@@ -6,3 +6,5 @@ torch
 torchvision
 pycrypto
 flashtext
+zstandard
+nltk
