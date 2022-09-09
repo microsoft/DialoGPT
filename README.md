@@ -1,6 +1,6 @@
 # A State-of-the-Art Large-scale Pretrained Response Generation Model (DialoGPT)
 
-<p align="center">
+<p>
 <a href="https://console.tiyaro.ai/explore?q=dialogpt&pub=microsoft"> <img src="https://tiyaro-public-docs.s3.us-west-2.amazonaws.com/assets/try_on_tiyaro_badge.svg"></a>
 </p>
 
