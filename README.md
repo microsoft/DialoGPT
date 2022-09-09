@@ -1,5 +1,9 @@
 # A State-of-the-Art Large-scale Pretrained Response Generation Model (DialoGPT)
 
+<p>
+<a href="https://console.tiyaro.ai/explore?q=dialogpt&pub=microsoft"> <img src="https://tiyaro-public-docs.s3.us-west-2.amazonaws.com/assets/try_on_tiyaro_badge.svg"></a>
+</p>
+
 This repository contains the source code and trained model for a large-scale pretrained dialogue response generation model. The [human evaluation results](#human_eval) indicate that the response generated from DialoGPT is comparable to human response quality under a single-turn conversation Turing test.
 
 <!--See more details on our [project page](https://www.microsoft.com/en-us/research/project/large-scale-pretraining-for-response-generation/)-->
@@ -16,6 +20,8 @@ ArXiv paper: [https://arxiv.org/abs/1911.00536](https://arxiv.org/abs/1911.00536
 
 
 ## News ##
+
+***(Update 09/08/2022) Tiyaro.ai has live demo pages for a number of [DialoGPT hosted models](https://console.tiyaro.ai/explore?q=dialogpt&pub=microsoft) that allows direct API calls and web-based experimentation via dedicated model card, [see example](https://console.tiyaro.ai/explore/microsoft-DialoGPT-large/api)***
 
 ***(Update 07/09/2022) Changes on the files.pushshift.io/reddit server caused our data generation pipeline to break. These problems have now been fixed, and the steps explained in the Data Preparation subsection below should work again. Data is generated in about 10 hours with 8 processes (`-j 8`), and 800GB of temporary disk space is needed.***
 
