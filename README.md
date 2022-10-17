@@ -1,5 +1,7 @@
 # A State-of-the-Art Large-scale Pretrained Response Generation Model (DialoGPT)
 
+## This project page is no longer maintained as DialoGPT is superseded by [GODEL](https://github.com/microsoft/GODEL), which outperforms DialoGPT according to the results of [this paper](https://arxiv.org/pdf/2206.11309.pdf). Unless you use DialoGPT for reproducibility reasons, we highly recommend you switch to [GODEL](https://github.com/microsoft/GODEL).
+
 This repository contains the source code and trained model for a large-scale pretrained dialogue response generation model. The [human evaluation results](#human_eval) indicate that the response generated from DialoGPT is comparable to human response quality under a single-turn conversation Turing test.
 
 <!--See more details on our [project page](https://www.microsoft.com/en-us/research/project/large-scale-pretraining-for-response-generation/)-->
